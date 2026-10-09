@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EcoImpacto App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --naranja: #f39c12;
+            --naranja-oscuro: #e67e22;
+            --azul: #3498db;
+            --azul-oscuro: #2980b9;
+            --oscuro: #2c3e50;
+            --gris-bg: #e4e9ed;
+            --rojo: #e74c3c;
+            --verde: #2ecc71;
+            --verde-oscuro: #27ae60;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e272e 0%, #2f3640 100%);
+            color: var(--oscuro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* CONTENEDOR TIPO MARCO DE CELULAR */
+        .phone-container {
+            width: 100%;
+            max-width: 414px;
+            height: 100vh;
+            max-height: 896px;
+            background: #f8fafc;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .phone-container {
+                height: 88vh;
+                border-radius: 40px;
+                border: 10px solid #2f3640;
+            }
+        }
+
+        /* BARRA DE ESTADO FIJA SUPERIOR */
+        .phone-status-bar {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 1100;
+        }
+
+        /* ÁREA DE CONTENIDO SCROLLEABLE */
+        .phone-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 85px; /* Espacio para la barra inferior */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .auth-card {
+            width: 90%;
+            max-width: 360px;
+            margin: 40px auto;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .container {
+            width: 100%;
+            padding: 15px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 20px 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .target-box {
+            background: #ebf5fb;
+            border-left: 4px solid var(--azul);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 0.82rem;
+        }
+
+        .input-login {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border: 2px solid #eef2f5;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            background: #fafbfc;
+            font-family: inherit;
+        }
+        .input-login:focus {
+            outline: none;
+            border-color: var(--naranja);
+            background: var(--white);
+        }
+
+        .btn-auth {
+            background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-oscuro) 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 12px;
+            font-size: 0.95rem;
+        }
+
+        .btn-google {
+            background: white;
+            color: #555;
+            border: 2px solid #eef2f5;
+            padding: 10px;
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .toggle-pass-container {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin: 6px 2px;
+        }
+        .toggle-pass-container input { margin-right: 6px; accent-color: var(--naranja); }
+
+        .link-recuperar {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--azul);
+            text-decoration: none;
+        }
+
+        /* BARRA DE NAVEGACIÓN INFERIOR ESTILO APP NATIVA */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 8px 2px;
+        }
+
+        nav button {
+            background: transparent;
+            color: #7f8c8d;
+            border: none;
+            padding: 6px 4px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.55rem;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            flex: 1;
+            position: relative;
+        }
+        nav button span { font-size: 1.1rem; }
+        nav button.active { color: var(--naranja); font-weight: 600; background: rgba(243, 156, 18, 0.08); }
+
+        .badge-carrito {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            background: var(--rojo);
+            color: white;
+            font-size: 0.55rem;
+            padding: 1px 4px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        header {
+            background: linear-gradient(rgba(44, 62, 80, 0.6), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 30px 15px;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 15px;
+        }
+        header h1 { font-size: 1.3rem; margin-bottom: 4px; }
+        header p { font-size: 0.8rem; opacity: 0.9; }
+
+        .menu-hamburguesa-card {
+            background: #f8f9f9;
+            border: 2px solid #d5dbdb;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 16px;
+        }
+        .btn-hamburguesa {
+            background: var(--oscuro);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+            justify-content: center;
+        }
+        .contenido-ods13 {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            font-size: 0.82rem;
+        }
+        .contenido-ods13.activo { display: block; }
+
+        .grid-impactos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+        
+        .cuadro-resultado {
+            background: #fff;
+            padding: 14px 10px;
+            border-radius: 14px;
+            border: 2px solid #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: center;
+        }
+        .cuadro-resultado h4 { font-size: 0.8rem; }
+        .porcentaje-txt { font-size: 1.6rem; font-weight: 700; color: var(--oscuro); }
+
+        .seccion-test { display: none; }
+        .seccion-test.activa { display: block; }
+
+        .pregunta-box {
+            margin-bottom: 12px;
+            padding: 14px;
+            background: #fdfefe;
+            border-radius: 12px;
+            border: 1px solid #eef2f5;
+        }
+        .pregunta-box p { font-weight: 600; font-size: 0.88rem; margin-bottom: 10px; }
+
+        .opcion {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 10px 12px;
+            margin: 6px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid #eef2f5;
+            font-size: 0.83rem;
+        }
+        .opcion input { margin-right: 10px; accent-color: var(--naranja); }
+
+        .btn-final {
+            background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-oscuro) 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin: 20px auto 10px auto;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .grid-medallas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .medaling-card {
+            background: #fafbfc;
+            padding: 12px 8px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #f0f2f5;
+            filter: grayscale(100%);
+            opacity: 0.4;
+        }
+        .medaling-card.desbloqueada { filter: grayscale(0%); opacity: 1; border-color: var(--naranja); background: #fff; }
+        .medalla-icon { font-size: 1.5rem; margin-bottom: 3px; }
+        .medalla-title { font-size: 0.7rem; font-weight: 600; }
+
+        .tip-box-dinamico {
+            background: rgba(44,62,80,0.04);
+            border-left: 3px solid var(--azul);
+            padding: 8px 10px;
+            margin-top: 4px;
+            display: none;
+            font-size: 0.75rem;
+            color: #34495e;
+            text-align: left;
+        }
+
+        .textarea-comentario {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 2px solid #eef2f5;
+            border-radius: 10px;
+            font-family: inherit;
+            resize: none;
+            background: #fafbfc;
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+
+        .btn-comentario {
+            background: var(--azul);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .contenedor-lista-comentarios { margin-top: 15px; max-height: 200px; overflow-y: auto; }
+        .comentario-item { background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 8px; border-left: 3px solid var(--azul); font-size: 0.8rem; text-align: left; }
+        .comentario-meta { font-size: 0.7rem; color: #7f8c8d; display: flex; justify-content: space-between; margin-bottom: 2px; }
+
+        .tienda-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .producto-card {
+            background: #fff;
+            border: 2px solid #f0f2f5;
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .producto-titulo { font-size: 0.95rem; font-weight: 600; color: var(--oscuro); margin-bottom: 4px; }
+        .producto-desc { font-size: 0.78rem; color: #7f8c8d; margin-bottom: 8px; line-height: 1.3; }
+        .producto-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+        .producto-precio { font-size: 1rem; font-weight: 700; color: var(--verde-oscuro); }
+        .btn-comprar {
+            background: linear-gradient(135deg, var(--verde) 0%, var(--verde-oscuro) 100%);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.78rem;
+        }
+
+        .carrito-container {
+            background: #fdfefe;
+            border: 2px dashed var(--azul);
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .carrito-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eef2f5;
+            font-size: 0.82rem;
+        }
+        .btn-eliminar-item {
+            background: var(--rojo);
+            color: white;
+            border: none;
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        .carrito-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .btn-checkout {
+            background: linear-gradient(135deg, var(--azul) 0%, var(--azul-oscuro) 100%);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        /* Trivia Interactiva */
+        .trivia-interactiva-box {
+            background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%);
+            border: 2px solid #f9e79f;
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .trivia-options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 10px 0;
+        }
+        .trivia-option-btn {
+            background-color: #ffffff;
+            border: 2px solid #e9ecef;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            text-align: left;
+            font-family: inherit;
+        }
+        .trivia-option-btn.correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; }
+        .trivia-option-btn.incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+
+        .retos-card {
+            background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%);
+            border: 2px solid #f9e79f;
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .evidencia-card {
+            background: linear-gradient(135deg, #e8f8f5 0%, #d1f2eb 100%);
+            border: 2px solid #a3e4d7;
+            border-radius: 14px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        /* Rango y Niveles */
+        .rango-card {
+            background: linear-gradient(135deg, #ebf5fb 0%, #d4efdf 100%);
+            border: 2px solid #85c1e9;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .rango-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+        .rango-badge-icon {
+            font-size: 2.2rem;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .barra-progreso-container {
+            width: 100%;
+            background: #e2e8f0;
+            border-radius: 8px;
+            height: 8px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .barra-progreso-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--verde) 0%, var(--azul) 100%);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+        .streak-pill {
+            background: #f39c12;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- BARRA DE ESTADO MÓVIL -->
+    <div class="phone-status-bar">
+        <span>9:41</span>
+        <span>EcoImpacto UTSC 🌿</span>
+        <span>5G 🔋</span>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL SCROLLEABLE -->
+    <div class="phone-content">
+
+        <!-- SECCIÓN LOGIN -->
+        <div id="login-section" class="auth-card">
+            <div style="font-size: 2.5rem; margin-bottom: 6px;">🌿</div>
+            <h2 style="color: var(--naranja-oscuro); font-size: 1.3rem;">EcoImpacto UTSC</h2>
+            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 20px;">Acción por el Clima (ODS 13)</p>
+            
+            <div id="login-inputs">
+                <input type="email" id="login-email" class="input-login" placeholder="Correo electrónico">
+                <input type="password" id="login-pass" class="input-login" placeholder="Contraseña">
+                <label class="toggle-pass-container"><input type="checkbox" onclick="conmutarPassword('login-pass')"> Mostrar contraseña</label>
+                <button class="btn-auth" onclick="iniciarSesion()">ENTRAR A MI PANEL</button>
+                <a href="#" class="link-recuperar" onclick="irARecuperar()">¿Olvidaste tu contraseña?</a>
+            </div>
+            
+            <button class="btn-google" onclick="loginConGoogle()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="14" alt="Google"> Continuar con Google
+            </button>
+            
+            <button class="btn-google" style="background-color: #4267B2; color: white;" onclick="loginConFacebook()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="14" alt="Facebook"> Continuar con Facebook
+            </button>
+
+            <p style="font-size: 0.78rem; margin-top: 15px; color: #95a5a6;">¿No tienes cuenta? <a href="#" onclick="irARegistro()" style="color: var(--naranja); font-weight: bold; text-decoration: none;">Regístrate</a></p>
+        </div>
+
+        <!-- SECCIÓN TOKEN -->
+        <div id="token-section" class="auth-card" style="display: none;">
+            <div style="font-size: 2.5rem; margin-bottom: 6px;">🔑</div>
+            <h2 style="font-size: 1.2rem;">Seguridad UTSC</h2>
+            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 12px;">Token temporal generado:</p>
+            <div style="background: #ebf5fb; padding: 12px; border-radius: 10px; margin-bottom: 15px; font-weight: bold; font-size: 1.2rem; color: var(--azul-oscuro); border: 2px dashed var(--azul);">
+                <span id="display-token-id">0000</span>
+            </div>
+            <input type="text" id="input-token-value" class="input-login" placeholder="4 dígitos" maxlength="4" style="text-align: center; font-size: 1.1rem; font-weight: 600; letter-spacing: 2px;">
+            <button class="btn-auth" onclick="validarTokenEscrito()">VERIFICAR</button>
+            <p style="margin-top: 12px;"><a href="#" onclick="irALogin()" style="color: #95a5a6; text-decoration: none; font-size: 0.8rem;">← Cancelar</a></p>
+        </div>
+
+        <!-- SECCIÓN REGISTRO -->
+        <div id="register-section" class="auth-card" style="display: none;">
+            <h2 style="font-size: 1.2rem;">Únete al cambio</h2>
+            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 15px;">Crea tu cuenta nueva</p>
+            <input type="email" id="reg-email" class="input-login" placeholder="Correo electrónico">
+            <input type="password" id="reg-pass" class="input-login" placeholder="Contraseña (mín. 8 caracteres)">
+            <button class="btn-auth" onclick="registrarNuevoUsuario()">CREAR CUENTA</button>
+            <p style="margin-top: 12px;"><a href="#" onclick="irALogin()" style="color: #95a5a6; text-decoration: none; font-size: 0.8rem;">← Volver</a></p>
+        </div>
+
+        <!-- SECCIÓN RECUPERAR -->
+        <div id="recover-section" class="auth-card" style="display: none;">
+            <h2 style="font-size: 1.2rem;">Recuperar Cuenta</h2>
+            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 15px;">Ingresa tu correo registrado</p>
+            <input type="email" id="recover-email" class="input-login" placeholder="Correo electrónico">
+            <button class="btn-auth" onclick="recuperarPassword()">ENVIAR ENLACE</button>
+            <p style="margin-top: 12px;"><a href="#" onclick="irALogin()" style="color: #95a5a6; text-decoration: none; font-size: 0.8rem;">← Volver</a></p>
+        </div>
+
+        <!-- APLICACIÓN PRINCIPAL PROTEGIDA -->
+        <div id="app-protegida" style="display: none;">
+            <header>
+                <h1 id="user-welcome">Hola</h1>
+                <p id="eco-tip">"Acción por el Clima (ODS 13)"</p>
+            </header>
+
+            <div class="container">
+                <!-- SECCIÓN DASHBOARD -->
+                <section id="sec-dashboard" class="seccion-test activa">
+                    
+                    <div class="rango-card">
+                        <div class="rango-info">
+                            <div class="rango-badge-icon" id="rango-icono">🌱</div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; justify-content: space-between;">
+                                    <h3 id="rango-titulo" style="color: #1b4f72; font-size: 0.95rem;">Novato Verde</h3>
+                                    <div class="streak-pill">🔥 <span id="streak-counter">1</span> Días</div>
+                                </div>
+                                <p id="rango-descripcion" style="font-size: 0.75rem; color: #5d6d7e; margin: 4px 0;">Sube de nivel completando tests.</p>
+                                <div style="font-size: 0.7rem; font-weight: 600;">Progreso: <span id="rango-porcentaje-txt">0%</span></div>
+                                <div class="barra-progreso-container">
+                                    <div class="barra-progreso-fill" id="rango-barra-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-hamburguesa-card">
+                        <button class="btn-hamburguesa" onclick="alternarMenuOds13()">
+                            <span>☰</span> Información Clave ODS 13
+                        </button>
+                        <div id="panel-ods13" class="contenido-ods13">
+                            <p style="margin-bottom: 6px;">El ODS 13 exige medidas urgentes contra el cambio climático.</p>
+                            <ul style="margin-left: 15px; display: flex; flex-direction: column; gap: 3px; color: #555;">
+                                <li>Mitigación y ahorro energético.</li>
+                                <li>Reducción de plásticos en UTSC.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%); color: white;">
+                        <h3 style="color: var(--naranja); font-size: 1rem; margin-bottom: 4px;">🌤️ Clima Local (API)</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; margin-top: 6px;">
+                            <div>
+                                <strong style="font-size: 0.85rem; display: block;">Santa Catarina, MX</strong>
+                                <span id="txt-api-desc" style="font-size: 0.72rem; opacity: 0.85;">Sincronizando...</span>
+                            </div>
+                            <div id="txt-api-temp" style="font-size: 1.5rem; font-weight: 700;">--°C</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">📊 Estado Actual de tu Huella</h2>
+                        <div class="grid-impactos">
+                            <div id="box-general" class="cuadro-resultado"><h4>General 🌳</h4><span class="porcentaje-txt" id="txt-general">--%</span><div id="tip-general" class="tip-box-dinamico"></div></div>
+                            <div id="box-deporte" class="cuadro-resultado"><h4>Deporte 🏀</h4><span class="porcentaje-txt" id="txt-deporte">--%</span><div id="tip-deporte" class="tip-box-dinamico"></div></div>
+                            <div id="box-alimentacion" class="cuadro-resultado"><h4>Comida 🍎</h4><span class="porcentaje-txt" id="txt-alimentacion">--%</span><div id="tip-alimentacion" class="tip-box-dinamico"></div></div>
+                            <div id="box-moda" class="cuadro-resultado"><h4>Moda 👕</h4><span class="porcentaje-txt" id="txt-moda">--%</span><div id="tip-moda" class="tip-box-dinamico"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Trivia Interactiva -->
+                    <div class="trivia-interactiva-box">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <h3 style="color: #9a7d0a; font-size: 0.95rem; margin:0;">💡 EcoTrivia Diaria</h3>
+                            <span style="font-size: 0.78rem; font-weight: 600; color: #7d6608;">Pts: <span id="trivia-score">0</span></span>
+                        </div>
+                        <div id="trivia-question-text" style="font-size: 0.82rem; color: #7d6608; font-weight: 600; margin-bottom: 8px;">Cargando...</div>
+                        <div class="trivia-options-container" id="trivia-options-group"></div>
+                        <div id="trivia-feedback" style="font-size: 0.78rem; font-weight: bold; margin-bottom: 6px; min-height: 15px;"></div>
+                        <button id="trivia-next-btn" class="btn-auth" style="background: #d4ac0d; margin-top: 0; display: none; padding: 8px; font-size: 0.8rem;" onclick="siguientePreguntaTrivia()">Siguiente</button>
+                    </div>
+
+                    <div class="card" style="margin-top: 15px;">
+                        <h2 style="font-size: 1rem;">🏆 Logros</h2>
+                        <div class="grid-medallas">
+                            <div id="med-general" class="medaling-card"><div class="medalla-icon">🌳</div><div class="medalla-title">Guardián</div></div>
+                            <div id="med-deporte" class="medaling-card"><div class="medalla-icon">⚡</div><div class="medalla-title">Atleta</div></div>
+                            <div id="med-alimentacion" class="medaling-card"><div class="medalla-icon">🍏</div><div class="medalla-title">Nutrición</div></div>
+                            <div id="med-moda" class="medaling-card"><div class="medalla-icon">👕</div><div class="medalla-title">Sostenible</div></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">💬 Comunidad</h2>
+                        <textarea id="input-comentario" class="textarea-comentario" placeholder="Escribe tu opinión..."></textarea>
+                        <div style="text-align: right;"><button class="btn-comentario" onclick="publicarComentario()">Enviar</button></div>
+                        <div id="lista-comentarios" class="contenedor-lista-comentarios"></div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN TIENDA -->
+                <section id="sec-tienda" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">🛍 Tienda Ecológica</h2>
+                        <div class="target-box">Alternativas ecológicas para reducir plásticos.</div>
+                        
+                        <div class="tienda-grid">
+                            <div class="producto-card">
+                                <div><div class="producto-titulo">Termo Acero 750ml</div><div class="producto-desc">Conserva bebidas frías o calientes.</div></div>
+                                <div class="producto-footer"><span class="producto-precio">$320</span><button class="btn-comprar" onclick="agregarAlCarrito('Termo Acero 750ml', 320)">Agregar</button></div>
+                            </div>
+                            <div class="producto-card">
+                                <div><div class="producto-titulo">Bolsas de Tela (Set 3)</div><div class="producto-desc">Algodón orgánico para despensa.</div></div>
+                                <div class="producto-footer"><span class="producto-precio">$180</span><button class="btn-comprar" onclick="agregarAlCarrito('Bolsas de Tela (Set 3)', 180)">Agregar</button></div>
+                            </div>
+                            <div class="producto-card">
+                                <div><div class="producto-titulo">Cepillo Bambú (Pack 4)</div><div class="producto-desc">100% biodegradables.</div></div>
+                                <div class="producto-footer"><span class="producto-precio">$150</span><button class="btn-comprar" onclick="agregarAlCarrito('Cepillo Bambú (Pack 4)', 150)">Agregar</button></div>
+                            </div>
+                        </div>
+
+                        <div class="carrito-container">
+                            <h3 style="color: var(--azul-oscuro); font-size: 0.95rem; margin-bottom: 8px;">🛒 Tu Carrito</h3>
+                            <div id="lista-carrito"><p style="color: #95a5a6; font-size: 0.8rem; text-align: center;">Vacío.</p></div>
+                            <div class="carrito-total"><span>Total:</span><span id="carrito-precio-total">$0</span></div>
+                            <button class="btn-checkout" onclick="procesarCompra()">FINALIZAR COMPRA</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN GENERAL -->
+                <section id="sec-general" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">🌳 Cuestionario General</h2>
+                        <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
+                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.9rem; display: none;" id="timer-general">Tiempo: 60s</div>
+                        <div id="contenido-test-general">
+                            <form id="form-general">
+                                <div class="pregunta-box"><p>1. ¿Cómo te desplazas a la universidad?</p><label class="opcion"><input type="radio" name="g1" value="10"> Caminando / Bici</label><label class="opcion"><input type="radio" name="g1" value="5"> Público</label><label class="opcion"><input type="radio" name="g1" value="0"> Auto</label></div>
+                                <div class="pregunta-box"><p>2. ¿Cargas tu propio termo?</p><label class="opcion"><input type="radio" name="g2" value="10"> Siempre</label><label class="opcion"><input type="radio" name="g2" value="0"> PET</label></div>
+                                <div class="pregunta-box"><p>3. ¿Separas residuos?</p><label class="opcion"><input type="radio" name="g3" value="10"> Sí</label><label class="opcion"><input type="radio" name="g3" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>4. ¿Apagas luces innecesarias?</p><label class="opcion"><input type="radio" name="g4" value="10"> Sí</label><label class="opcion"><input type="radio" name="g4" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>5. ¿Usas bolsas reutilizables?</p><label class="opcion"><input type="radio" name="g5" value="10"> Sí</label><label class="opcion"><input type="radio" name="g5" value="0"> No</label></div>
+                            </form>
+                            <button class="btn-final" onclick="calcularImpacto('general', 5)">GUARDAR</button>
+                        </div>
+                        <div id="bloqueo-test-general" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.9rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN DEPORTE -->
+                <section id="sec-deporte" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">🏀 Deporte</h2>
+                        <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
+                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.9rem; display: none;" id="timer-deporte">Tiempo: 60s</div>
+                        <div id="contenido-test-deporte">
+                            <form id="form-deporte">
+                                <div class="pregunta-box"><p>1. ¿Entrenas al aire libre?</p><label class="opcion"><input type="radio" name="d1" value="10"> Sí</label><label class="opcion"><input type="radio" name="d1" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>2. ¿Usas envase reutilizable?</p><label class="opcion"><input type="radio" name="d2" value="10"> Sí</label><label class="opcion"><input type="radio" name="d2" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>3. ¿Tus duchas duran menos de 5 min?</p><label class="opcion"><input type="radio" name="d3" value="10"> Sí</label><label class="opcion"><input type="radio" name="d3" value="0"> No</label></div>
+                            </form>
+                            <button class="btn-final" onclick="calcularImpacto('deporte', 3)">GUARDAR</button>
+                        </div>
+                        <div id="bloqueo-test-deporte" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.9rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN ALIMENTACIÓN -->
+                <section id="sec-alimentacion" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">🍎 Comida</h2>
+                        <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
+                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.9rem; display: none;" id="timer-alimentacion">Tiempo: 60s</div>
+                        <div id="contenido-test-alimentacion">
+                            <form id="form-alimentacion">
+                                <div class="pregunta-box"><p>1. ¿Consumes alimentos locales?</p><label class="opcion"><input type="radio" name="a1" value="10"> Sí</label><label class="opcion"><input type="radio" name="a1" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>2. ¿Evitas plásticos de un solo uso?</p><label class="opcion"><input type="radio" name="a2" value="10"> Sí</label><label class="opcion"><input type="radio" name="a2" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>3. ¿Separas residuos orgánicos?</p><label class="opcion"><input type="radio" name="a3" value="10"> Sí</label><label class="opcion"><input type="radio" name="a3" value="0"> No</label></div>
+                            </form>
+                            <button class="btn-final" onclick="calcularImpacto('alimentacion', 3)">GUARDAR</button>
+                        </div>
+                        <div id="bloqueo-test-alimentacion" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.9rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN MODA -->
+                <section id="sec-moda" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">👕 Moda</h2>
+                        <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
+                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.9rem; display: none;" id="timer-moda">Tiempo: 60s</div>
+                        <div id="contenido-test-moda">
+                            <form id="form-moda">
+                                <div class="pregunta-box"><p>1. ¿Compras segunda mano?</p><label class="opcion"><input type="radio" name="m1" value="10"> Sí</label><label class="opcion"><input type="radio" name="m1" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>2. ¿Evitas fast fashion?</p><label class="opcion"><input type="radio" name="m2" value="10"> Sí</label><label class="opcion"><input type="radio" name="m2" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>3. ¿Donas ropa que no usas?</p><label class="opcion"><input type="radio" name="m3" value="10"> Sí</label><label class="opcion"><input type="radio" name="m3" value="0"> No</label></div>
+                            </form>
+                            <button class="btn-final" onclick="calcularImpacto('moda', 3)">GUARDAR</button>
+                        </div>
+                        <div id="bloqueo-test-moda" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.9rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN RETOS -->
+                <section id="sec-retos" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">🎯 Retos ODS 13</h2>
+                        <div class="retos-card">
+                            <h3 id="reto-semanal-titulo" style="color: #9a7d0a; font-size: 0.9rem; margin-bottom: 4px;">🌱 Reto Semanal</h3>
+                            <p id="reto-semanal-desc" style="font-size: 0.8rem; color: #7d6608; margin-bottom: 8px;">Cargando...</p>
+                            <button class="btn-auth" style="background: #d4ac0d; margin-top: 0; font-size: 0.8rem;" onclick="unirseRetoSemanal()">PARTICIPAR</button>
+                        </div>
+
+                        <div class="evidencia-card" style="margin-top: 15px;">
+                            <h3 style="color: #117a65; font-size: 0.9rem; margin-bottom: 4px;">📸 Subir Evidencia</h3>
+                            <input type="text" id="evidencia-titulo" class="input-login" placeholder="Título" style="background: white; font-size: 0.8rem;">
+                            <textarea id="evidencia-desc" class="textarea-comentario" placeholder="Descripción..." style="background: white; height: 60px;"></textarea>
+                            <input type="file" id="evidencia-archivo" accept="image/*" style="font-size: 0.8rem; margin: 8px 0; width: 100%;">
+                            <button class="btn-auth" style="background: #1abc9c; margin-top: 0; font-size: 0.8rem;" onclick="subirEvidenciaAccion()">SUBIR</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN QUIZ SEMANAL -->
+                <section id="sec-cuestionario-semanal" class="seccion-test">
+                    <div class="card">
+                        <h2 style="font-size: 1rem;">⏱️ Quiz Semanal</h2>
+                        <div id="cuestionario-timer" style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.9rem;">Tiempo: 60s</div>
+                        <div id="quiz-contenido-activo">
+                            <form id="form-cuestionario-semanal">
+                                <div class="pregunta-box"><p>1. ¿Acción que reduce tu huella?</p><label class="opcion"><input type="radio" name="cs1" value="correcta"> Usar bici</label><label class="opcion"><input type="radio" name="cs1" value="incorrecta"> Dejar luces</label></div>
+                            </form>
+                            <button type="button" class="btn-final" onclick="enviarCuestionarioSemanal(false)">Enviar</button>
+                        </div>
+                        <div id="quiz-mensaje-bloqueo" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.85rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN PERFIL -->
+                <section id="sec-cuenta" class="seccion-test">
+                    <div class="card" style="text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 6px;">👤</div>
+                        <h2 style="font-size: 1.1rem;">Mi Panel UTSC</h2>
+                        <div class="input-login" id="info-correo" style="font-size: 0.82rem; pointer-events: none;">--</div>
+                        <div style="margin: 15px auto; max-width: 200px; background: #f8fafc; padding: 10px; border-radius: 10px; border: 2px dashed #cbd5e1;">
+                            <div style="font-size: 0.75rem; color: #64748b; font-weight: 600;">ID Eco-UTSC</div>
+                            <div id="qr-id-txt" style="font-size: 0.85rem; font-weight: bold; color: var(--oscuro);">--</div>
+                        </div>
+                        <button class="btn-auth" style="background: #95a5a6; font-size: 0.85rem;" onclick="cerrarSesion()">CERRAR SESIÓN</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- BARRA DE NAVEGACIÓN INFERIOR (ESTILO APP NATIVA) -->
+    <nav id="app-nav" style="display: none;">
+        <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="active"><span>🏠</span>Inicio</button>
+        <button onclick="cambiarSeccion('tienda')" id="nav-tienda"><span>🛍️</span>Tienda<span id="badge-carrito" class="badge-carrito" style="display:none;">0</span></button>
+        <button onclick="cambiarSeccion('general')" id="nav-general"><span>🌳</span>General</button>
+        <button onclick="cambiarSeccion('deporte')" id="nav-deporte"><span>🏀</span>Deporte</button>
+        <button onclick="cambiarSeccion('alimentacion')" id="nav-alimentacion"><span>🍎</span>Comida</button>
+        <button onclick="cambiarSeccion('moda')" id="nav-moda"><span>👕</span>Moda</button>
+        <button onclick="cambiarSeccion('retos')" id="nav-retos"><span>🎯</span>Retos</button>
+        <button onclick="cambiarSeccion('cuestionario-semanal')" id="nav-cuestionario-semanal"><span>⏱️</span>Quiz</button>
+        <button onclick="cambiarSeccion('cuenta')" id="nav-cuenta"><span>👤</span>Perfil</button>
+    </nav>
+</div>
+
+<!-- FIREBASE Y LIBRERÍAS EXTERNAS -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDPylKnE7A5SrajQp64zlg2FM046SL7i10",
+        authDomain: "proyectoecoimpacto2026.firebaseapp.com",
+        projectId: "proyectoecoimpacto2026",
+        storageBucket: "proyectoecoimpacto2026.firebasestorage.app",
+        messagingSenderId: "125633519840",
+        appId: "1:125633519840:web:75704f05244e892c90c766"
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+    
+    let usuarioTemporal = null;
+    let tokenGeneradoGlobal = ""; 
+    let carritoCompras = [];
+
+    let temporizadorest = null;
+    let tiempoRestanteTest = 60;
+
+    function iniciarTemporizadorTest(categoria) {
+        clearInterval(temporizadorest);
+        tiempoRestanteTest = 60;
+        const timerEl = document.getElementById(`timer-${categoria}`);
+        if(timerEl) timerEl.innerText = `Tiempo: 60s`;
+        
+        temporizadorest = setInterval(() => {
+            tiempoRestanteTest--;
+            if(timerEl) timerEl.innerText = `Tiempo: ${tiempoRestanteTest}s`;
+            
+            if (tiempoRestanteTest <= 0) {
+                clearInterval(temporizadorest);
+                calcularImpacto(categoria, 3, true);
+            }
+        }, 1000);
+    }
+
+    function verificarBloqueoTest(categoria) {
+        const ultimoIntento = localStorage.getItem(`eco_ultimo_intento_${categoria}`);
+        const timerEl = document.getElementById(`timer-${categoria}`);
+        const contenidoEl = document.getElementById(`contenido-test-${categoria}`);
+        const bloqueoEl = document.getElementById(`bloqueo-test-${categoria}`);
+
+        if (ultimoIntento) {
+            const ahora = new Date().getTime();
+            const unaSemanaMs = 7 * 24 * 60 * 60 * 1000;
+            
+            if (ahora - parseInt(ultimoIntento) < unaSemanaMs) {
+                if(contenidoEl) contenidoEl.style.display = 'none';
+                if(timerEl) timerEl.style.display = 'none';
+                if(bloqueoEl) bloqueoEl.style.display = 'block';
+                return true;
+            }
+        }
+        if(contenidoEl) contenidoEl.style.display = 'block';
+        if(timerEl) timerEl.style.display = 'block';
+        if(bloqueoEl) bloqueoEl.style.display = 'none';
+        iniciarTemporizadorTest(categoria);
+        return false;
+    }
+
+    let tiempoRestanteQuiz = 60;
+    let temporizadorQuiz = null;
+
+    function iniciarTemporizadorQuiz() {
+        clearInterval(temporizadorQuiz);
+        tiempoRestanteQuiz = 60;
+        temporizadorQuiz = setInterval(() => {
+            tiempoRestanteQuiz--;
+            const timerEl = document.getElementById('cuestionario-timer');
+            if(timerEl) timerEl.innerText = `Tiempo: ${tiempoRestanteQuiz}s`;
+            
+            if (tiempoRestanteQuiz <= 0) {
+                clearInterval(temporizadorQuiz);
+                enviarCuestionarioSemanal(true);
+            }
+        }, 1000);
+    }
+
+    function verificarBloqueoSemanal() {
+        const ultimoIntento = localStorage.getItem('eco_ultimo_intento_semanal');
+        if (ultimoIntento) {
+            const ahora = new Date().getTime();
+            const unaSemanaMs = 7 * 24 * 60 * 60 * 1000;
+            
+            if (ahora - parseInt(ultimoIntento) < unaSemanaMs) {
+                document.getElementById('quiz-contenido-activo').style.display = 'none';
+                document.getElementById('cuestionario-timer').style.display = 'none';
+                document.getElementById('quiz-mensaje-bloqueo').style.display = 'block';
+                return true;
+            }
+        }
+        document.getElementById('quiz-contenido-activo').style.display = 'block';
+        document.getElementById('cuestionario-timer').style.display = 'block';
+        document.getElementById('quiz-mensaje-bloqueo').style.display = 'none';
+        iniciarTemporizadorQuiz();
+        return false;
+    }
+
+    function enviarCuestionarioSemanal(porTiempo = false) {
+        clearInterval(temporizadorQuiz);
+        localStorage.setItem('eco_ultimo_intento_semanal', new Date().getTime());
+        document.getElementById('quiz-contenido-activo').style.display = 'none';
+        document.getElementById('cuestionario-timer').style.display = 'none';
+        document.getElementById('quiz-mensaje-bloqueo').style.display = 'block';
+        Swal.fire({ icon: porTiempo ? 'warning' : 'success', title: porTiempo ? 'Tiempo agotado' : '¡Enviado!', timer: 15up || 1500, showConfirmButton: false });
+    }
+
+    function obtenerTipPorCategoriaYPorcentaje(categoria, porcentaje) {
+        return porcentaje >= 70 ? "¡Excelente nivel!" : porcentaje >= 40 ? "Buen intento, optimiza recursos." : "Alerta: huella alta.";
+    }
+
+    const preguntasTrivia = [
+        { pregunta: "¿Cuánto tarda una botella PET en descomponerse?", opciones: ["10 años", "100 años", "Más de 400 años", "50 años"], respuestaCorrecta: 2 },
+        { pregunta: "¿Material reciclable infinitamente?", opciones: ["Vidrio", "Papel", "Cartón", "Plástico"], respuestaCorrecta: 0 }
+    ];
+
+    let preguntaActualTrivia = 0;
+    let puntuacionTrivia = 0;
+    let respondidoTrivia = false;
+
+    function cargarPreguntaTrivia() {
+        respondidoTrivia = false;
+        const feedbackEl = document.getElementById("trivia-feedback");
+        const nextBtnEl = document.getElementById("trivia-next-btn");
+        if(feedbackEl) feedbackEl.textContent = "";
+        if(nextBtnEl) nextBtnEl.style.display = "none";
+        
+        const actual = preguntasTrivia[preguntaActualTrivia];
+        document.getElementById("trivia-question-text").textContent = actual.pregunta;
+        const optionsGroupEl = document.getElementById("trivia-options-group");
+        optionsGroupEl.innerHTML = "";
+        actual.opciones.forEach((opcion, index) => {
+            const btn = document.createElement("button");
+            btn.classList.add("trivia-option-btn");
+            btn.textContent = opcion;
+            btn.onclick = () => seleccionarRespuestaTrivia(index, btn);
+            optionsGroupEl.appendChild(btn);
+        });
+    }
+
+    function seleccionarRespuestaTrivia(indexSeleccionado, botonSeleccionado) {
+        if (respondidoTrivia) return;
+        respondidoTrivia = true;
+        const actual = preguntasTrivia[preguntaActualTrivia];
+        const botones = document.getElementById("trivia-options-group").children;
+        if (indexSeleccionado === actual.respuestaCorrecta) {
+            botonSeleccionado.classList.add("correct");
+            puntuacionTrivia += 10;
+            document.getElementById("trivia-score").textContent = puntuacionTrivia;
+            document.getElementById("trivia-feedback").textContent = "¡Correcto! +10 pts";
+        } else {
+            botonSeleccionado.classList.add("incorrect");
+            botones[actual.respuestaCorrecta].classList.add("correct");
+            document.getElementById("trivia-feedback").textContent = "Incorrecto.";
+        }
+        document.getElementById("trivia-next-btn").style.display = "block";
+    }
+
+    function siguientePreguntaTrivia() {
+        preguntaActualTrivia = (preguntaActualTrivia + 1) % preguntasTrivia.length;
+        cargarPreguntaTrivia();
+    }
+
+    function cargarRetosDinamicos() {
+        document.getElementById('reto-semanal-titulo').innerText = "🌱 Reto: Cero Plásticos";
+        document.getElementById('reto-semanal-desc').innerText = "Evita usar botellas de un solo uso por 7 días.";
+    }
+
+    function alternarMenuOds13() {
+        document.getElementById('panel-ods13').classList.toggle('activo');
+    }
+
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            usuarioTemporal = user;
+            if (sessionStorage.getItem('tokenVerificado') === 'true') {
+                mostrarApp();
+            } else {
+                levantarFlujoDeToken();
+            }
+        } else {
+            auth.getRedirectResult().then((result) => {
+                if (result.user) {
+                    usuarioTemporal = result.user;
+                    if (sessionStorage.getItem('tokenVerificado') === 'true') mostrarApp();
+                    else levantarFlujoDeToken();
+                } else {
+                    ocultarTodoYMostrarLogin();
+                }
+            }).catch(() => ocultarTodoYMostrarLogin());
+        }
+    });
+
+    function ocultarTodoYMostrarLogin() {
+        document.getElementById('app-protegida').style.display = 'none';
+        document.getElementById('app-nav').style.display = 'none';
+        document.getElementById('token-section').style.display = 'none';
+        document.getElementById('register-section').style.display = 'none';
+        document.getElementById('recover-section').style.display = 'none';
+        document.getElementById('login-section').style.display = 'block';
+    }
+
+    function levantarFlujoDeToken() {
+        tokenGeneradoGlobal = String(Math.floor(1000 + Math.random() * 9000));
+        document.getElementById('display-token-id').innerText = tokenGeneradoGlobal;
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('token-section').style.display = 'block';
+    }
+
+    function validarTokenEscrito() {
+        if (document.getElementById('input-token-value').value.trim() === tokenGeneradoGlobal) {
+            sessionStorage.setItem('tokenVerificado', 'true');
+            document.getElementById('token-section').style.display = 'none';
+            mostrarApp();
+        } else {
+            alert("Token incorrecto.");
+        }
+    }
+
+    function consultarApiClimaSustentable() {
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=Santa%20Catarina,MX&units=metric&lang=es&appid=602bfcb432ccbe2e8969cfba96d6a693")
+            .then(res => res.json())
+            .then(datos => {
+                document.getElementById('txt-api-temp').innerText = `${Math.round(datos.main.temp)}°C`;
+                document.getElementById('txt-api-desc').innerText = datos.weather[0].description;
+            })
+            .catch(() => { document.getElementById('txt-api-temp').innerText = "24°C"; });
+    }
+
+    function conmutarPassword(id) {
+        const el = document.getElementById(id);
+        el.type = el.type === "password" ? "text" : "password";
+    }
+
+    function iniciarSesion() {
+        const e = document.getElementById('login-email').value.trim();
+        const p = document.getElementById('login-pass').value;
+        if(!e || !p) return alert("Llena todos los campos.");
+        auth.signInWithEmailAndPassword(e, p).catch(err => alert(err.message));
+    }
+
+    function recuperarPassword() {
+        const e = document.getElementById('recover-email').value.trim();
+        if(!e) return alert("Ingresa tu correo.");
+        auth.sendPasswordResetEmail(e).then(() => { alert("Correo enviado."); irALogin(); });
+    }
+
+    function loginConGoogle() { auth.signInWithPopup(googleProvider); }
+    function loginConFacebook() { auth.signInWithPopup(facebookProvider); }
+
+    function registrarNuevoUsuario() {
+        const e = document.getElementById('reg-email').value.trim();
+        const p = document.getElementById('reg-pass').value;
+        if (!e || p.length < 8) return alert("Mínimo 8 caracteres en contraseña.");
+        auth.createUserWithEmailAndPassword(e, p).then((cred) => {
+            db.collection("eco_stats").doc(cred.user.uid).set({ usuario: e, general: 0, deporte: 0, alimentacion: 0, moda: 0 }).then(() => {
+                alert("¡Cuenta creada!");
+                irALogin();
+            });
+        });
+    }
+
+    function mostrarApp() {
+        const user = auth.currentUser || usuarioTemporal;
+        if(!user) return;
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('token-section').style.display = 'none';
+        document.getElementById('app-protegida').style.display = 'block';
+        document.getElementById('app-nav').style.display = 'flex';
+        document.getElementById('user-welcome').innerText = `Hola, ${user.email ? user.email.split('@')[0] : 'Estudiante'}`;
+        document.getElementById('info-correo').innerText = user.email || 'Usuario';
+        document.getElementById('qr-id-txt').innerText = `UTSC-${user.uid.substring(0, 6).toUpperCase()}`;
+
+        consultarApiClimaSustentable();
+        cargarRetosDinamicos();
+        cargarPreguntaTrivia();
+        cargarDatosUsuario(user.uid);
+        escucharComentarios();
+    }
+
+    function cambiarSeccion(targetId) {
+        document.querySelectorAll('.seccion-test').forEach(sec => sec.classList.remove('activa'));
+        document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`sec-${targetId}`).classList.add('activa');
+        document.getElementById(`nav-${targetId}`).classList.add('active');
+        
+        if (['general', 'deporte', 'alimentacion', 'moda'].includes(targetId)) {
+            verificarBloqueoTest(targetId);
+        } else if (targetId === 'cuestionario-semanal') {
+            verificarBloqueoSemanal();
+        }
+        document.querySelector('.phone-content').scrollTop = 0;
+    }
+
+    function unirseRetoSemanal() { Swal.fire({ icon: 'success', title: '¡Te uniste al reto!', timer: 1200, showConfirmButton: false }); }
+
+    function subirEvidenciaAccion() {
+        const user = auth.currentUser || usuarioTemporal;
+        const titulo = document.getElementById('evidencia-titulo').value.trim();
+        const desc = document.getElementById('evidencia-desc').value.trim();
+        if(!titulo || !desc) return alert("Llena los campos.");
+        db.collection("evidencias_sustentables").add({ uid: user.uid, titulo, descripcion: desc, fecha: new Date() }).then(() => {
+            Swal.fire({ icon: 'success', title: '¡Guardado!', timer: 1200, showConfirmButton: false });
+            document.getElementById('evidencia-titulo').value = "";
+            document.getElementById('evidencia-desc').value = "";
+        });
+    }
+
+    function agregarAlCarrito(nombre, precio) {
+        carritoCompras.push({ nombre, precio });
+        actualizarVistaCarrito();
+        Swal.fire({ icon: 'success', title: '¡Añadido!', timer: 1000, showConfirmButton: false });
+    }
+
+    function eliminarDelCarrito(index) { carritoCompras.splice(index, 1); actualizarVistaCarrito(); }
+
+    function actualizarVistaCarrito() {
+        const contenedor = document.getElementById('lista-carrito');
+        const badge = document.getElementById('badge-carrito');
+        const totalSpan = document.getElementById('carrito-precio-total');
+        if (carritoCompras.length === 0) {
+            contenedor.innerHTML = "<p style='color: #95a5a6; font-size: 0.8rem; text-align: center;'>Vacío.</p>";
+            badge.style.display = 'none';
+            totalSpan.innerText = "$0";
+            return;
+        }
+        badge.style.display = 'inline-block';
+        badge.innerText = carritoCompras.length;
+        let html = "", total = 0;
+        carritoCompras.forEach((item, index) => {
+            total += item.precio;
+            html += `<div class="carrito-item-row"><span>${item.nombre}</span><div><strong>$${item.precio}</strong> <button class="btn-eliminar-item" onclick="eliminarDelCarrito(${index})">X</button></div></div>`;
+        });
+        contenedor.innerHTML = html;
+        totalSpan.innerText = `$${total}`;
+    }
+
+    function procesarCompra() {
+        const user = auth.currentUser || usuarioTemporal;
+        if (!user || carritoCompras.length === 0) return alert("Carrito vacío.");
+        let total = carritoCompras.reduce((sum, item) => sum + item.precio, 0);
+        db.collection("compras_sustentables").add({ uid: user.uid, productos: carritoCompras, total, fecha: new Date() }).then(() => {
+            Swal.fire({ icon: 'success', title: '¡Compra exitosa!', text: `Total: $${total}`, timer: 1500, showConfirmButton: false });
+            carritoCompras = [];
+            actualizarVistaCarrito();
+            cambiarSeccion('dashboard');
+        });
+    }
+
+    function calcularImpacto(categoria, numPreguntas, porTiempo = false) {
+        const user = auth.currentUser || usuarioTemporal;
+        clearInterval(temporizadorest);
+        localStorage.setItem(`eco_ultimo_intento_${categoria}`, new Date().getTime());
+
+        const datos = new FormData(document.getElementById(`form-${categoria}`));
+        let puntos = 0, respondidas = 0;
+        for (let i = 1; i <= numPreguntas; i++) {
+            let val = datos.get(`${categoria.substring(0,1)}${i}`);
+            if(val !== null) { puntos += parseInt(val); respondidas++; }
+        }
+        
+        if(!porTiempo && respondidas < numPreguntas) {
+            iniciarTemporizadorTest(categoria);
+            return alert("Responde todas las preguntas.");
+        }
+
+        const porcentaje = Math.round((puntos / (numPreguntas * 10)) * 100);
+        db.collection("eco_stats").doc(user.uid).set({ [categoria]: porcentaje }, { merge: true }).then(() => {
+            Swal.fire({ icon: porTiempo ? 'warning' : 'success', title: porTiempo ? 'Tiempo agotado' : '¡Guardado!', timer: 1200, showConfirmButton: false });
+            cargarDatosUsuario(user.uid);
+            cambiarSeccion('dashboard');
+        });
+    }
+
+    function cargarDatosUsuario(uid) {
+        db.collection("eco_stats").doc(uid).get().then(doc => {
+            if(doc.exists) {
+                const info = doc.data();
+                actualizarCardImpacto("general", info.general);
+                actualizarCardImpacto("deporte", info.deporte);
+                actualizarCardImpacto("alimentacion", info.alimentacion);
+                actualizarCardImpacto("moda", info.moda);
+                actualizarRangoGlobalEco([info.general || 0, info.deporte || 0, info.alimentacion || 0, info.moda || 0]);
+            }
+        });
+    }
+
+    function actualizarRangoGlobalEco(puntajes) {
+        const promedio = Math.round(puntajes.reduce((a, b) => a + b, 0) / 4);
+        let titulo = promedio >= 80 ? "Leyenda ODS 13" : promedio >= 60 ? "Guardián del Clima" : "Novato Verde";
+        document.getElementById('rango-titulo').innerText = titulo;
+        document.getElementById('rango-porcentaje-txt').innerText = `${promedio}%`;
+        document.getElementById('rango-barra-fill').style.width = `${promedio}%`;
+    }
+
+    function actualizarCardImpacto(cat, valor) {
+        const txtElemento = document.getElementById(`txt-${cat}`);
+        const medallaElemento = document.querySelectorAll('.medaling-card')[cat === "general" ? 0 : cat === "deporte" ? 1 : cat === "alimentacion" ? 2 : 3];
+        if(valor === undefined) { txtElemento.innerText = "--%"; return; }
+        txtElemento.innerText = `${valor}%`;
+        if(valor >= 70) medallaElemento.classList.add('desbloqueada');
+    }
+
+    function publicarComentario() {
+        const user = auth.currentUser || usuarioTemporal;
+        const texto = document.getElementById('input-comentario').value.trim();
+        if(!texto) return;
+        db.collection("comentarios").add({ correo: user.email || 'Anónimo', texto, fecha: new Date() }).then(() => {
+            document.getElementById('input-comentario').value = "";
+        });
+    }
+
+    function escucharComentarios() {
+        db.collection("comentarios").orderBy("fecha", "desc").limit(5).onSnapshot(snapshot => {
+            const contenedor = document.getElementById('lista-comentarios');
+            contenedor.innerHTML = snapshot.empty ? "<p style='text-align:center; font-size:0.75rem;'>Sin comentarios.</p>" : "";
+            snapshot.forEach(doc => {
+                const c = doc.data();
+                contenedor.innerHTML += `<div class="comentario-item"><div class="comentario-meta"><strong>${c.correo.split('@')[0]}</strong></div><p>${c.texto}</p></div>`;
+            });
+        });
+    }
+
+    function cerrarSesion() {
+        auth.signOut().then(() => {
+            usuarioTemporal = null;
+            sessionStorage.removeItem('tokenVerificado');
+            ocultarTodoYMostrarLogin();
+        });
+    }
+
+    function irARegistro() { document.getElementById('login-section').style.display = 'none'; document.getElementById('register-section').style.display = 'block'; }
+    function irALogin() { document.getElementById('register-section').style.display = 'none'; document.getElementById('recover-section').style.display = 'none'; document.getElementById('token-section').style.display = 'none'; document.getElementById('login-section').style.display = 'block'; }
+    function irARecuperar() { document.getElementById('login-section').style.display = 'none'; document.getElementById('recover-section').style.display = 'block'; }
+</script>
+</body>
+</html>
