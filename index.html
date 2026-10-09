@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EcoImpacto App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>EcoImpacto UTSC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --naranja: #f39c12;
-            --naranja-oscuro: #e67e22;
-            --azul: #3498db;
-            --azul-oscuro: #2980b9;
-            --oscuro: #2c3e50;
-            --gris-bg: #e4e9ed;
-            --rojo: #e74c3c;
-            --verde: #2ecc71;
-            --verde-oscuro: #27ae60;
-            --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #f1f5f9;
+            --danger: #ef4444;
+            --shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+            --radius: 20px;
         }
 
         * {
@@ -29,123 +27,136 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e272e 0%, #2f3640 100%);
-            color: var(--oscuro);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #0f172a;
+            color: var(--dark);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 0;
             overflow: hidden;
         }
 
-        /* CONTENEDOR TIPO MARCO DE CELULAR NATIVO */
+        /* MARCO TIPO SMARTPHONE MODERNIZADO */
         .phone-container {
             width: 100%;
-            max-width: 414px;
+            max-width: 412px;
             height: 100vh;
-            max-height: 896px;
-            background: #f8fafc;
+            max-height: 860px;
+            background: var(--light);
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
-        @media (min-width: 480px) {
+        @media (min-width: 460px) {
             .phone-container {
-                height: 90vh;
-                border-radius: 40px;
-                border: 10px solid #2f3640;
+                height: 88vh;
+                border-radius: 44px;
+                border: 8px solid #334155;
             }
         }
 
-        /* ÁREA DE CONTENIDO SCROLLEABLE */
         .phone-content {
             flex: 1;
             overflow-y: auto;
-            padding-bottom: 85px;
+            padding-bottom: 90px;
             -webkit-overflow-scrolling: touch;
         }
 
+        .phone-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .phone-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* ESTILOS DE AUTENTICACIÓN MODERNOS */
         .auth-card {
-            width: 90%;
-            max-width: 360px;
-            margin: 30px auto;
-            padding: 25px 20px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 25px;
+            width: 88%;
+            max-width: 350px;
+            margin: 60px auto;
+            padding: 30px 22px;
+            background: #ffffff;
+            border-radius: var(--radius);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
         }
 
         .container {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
         }
 
         .card {
-            background: var(--white);
-            border-radius: 18px;
-            padding: 20px 16px;
+            background: #ffffff;
+            border-radius: var(--radius);
+            padding: 20px 18px;
             margin-bottom: 16px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
         }
 
         .target-box {
-            background: #ebf5fb;
-            border-left: 4px solid var(--azul);
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            background: #ecfdf5;
+            border-left: 4px solid var(--primary);
+            padding: 12px 14px;
+            border-radius: 12px;
+            margin-bottom: 16px;
             font-size: 0.82rem;
+            color: #065f46;
         }
 
         .input-login {
             width: 100%;
-            padding: 12px 16px;
+            padding: 13px 16px;
             margin: 8px 0;
-            border: 2px solid #eef2f5;
-            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
             font-size: 0.9rem;
-            background: #fafbfc;
+            background: #f8fafc;
             font-family: inherit;
+            transition: all 0.2s;
         }
         .input-login:focus {
             outline: none;
-            border-color: var(--naranja);
-            background: var(--white);
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
         }
 
         .btn-auth {
-            background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-oscuro) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 13px;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             font-weight: 600;
             margin-top: 12px;
             font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            transition: transform 0.1s;
         }
+        .btn-auth:active { transform: scale(0.98); }
 
         .btn-google {
             background: white;
-            color: #555;
-            border: 2px solid #eef2f5;
-            padding: 10px;
+            color: #334155;
+            border: 2px solid #e2e8f0;
+            padding: 11px;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             font-weight: 600;
             margin-top: 10px;
             font-size: 0.85rem;
@@ -153,26 +164,27 @@
 
         .toggle-pass-container {
             font-size: 0.8rem;
-            color: #7f8c8d;
+            color: var(--gray);
             cursor: pointer;
             display: flex;
             align-items: center;
-            margin: 6px 2px;
+            margin: 8px 4px;
         }
-        .toggle-pass-container input { margin-right: 6px; accent-color: var(--naranja); }
+        .toggle-pass-container input { margin-right: 6px; accent-color: var(--primary); }
 
         .link-recuperar {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 12px;
             font-size: 0.8rem;
-            color: var(--azul);
+            color: var(--primary-dark);
             text-decoration: none;
+            font-weight: 500;
         }
 
-        /* BARRA DE NAVEGACIÓN INFERIOR ESTILO APP NATIVA */
+        /* NAVEGACIÓN INFERIOR ESTILO APP NATIVA IOS/ANDROID */
         nav {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
             display: flex;
             justify-content: space-around;
             position: absolute;
@@ -180,86 +192,95 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            padding: 8px 2px;
-            overflow-x: auto;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
+            border-top: 1px solid #e2e8f0;
+            padding: 8px 4px;
         }
 
         nav button {
             background: transparent;
-            color: #7f8c8d;
+            color: var(--gray);
             border: none;
-            padding: 6px 4px;
-            border-radius: 10px;
+            padding: 6px 2px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.55rem;
-            font-weight: 500;
+            font-size: 0.52rem;
+            font-weight: 600;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 3px;
             flex: 1;
-            min-width: 52px;
+            min-width: 48px;
             position: relative;
+            transition: color 0.2s;
         }
-        nav button span { font-size: 1.1rem; }
-        nav button.active { color: var(--naranja); font-weight: 600; background: rgba(243, 156, 18, 0.08); }
+        nav button span { font-size: 1.15rem; }
+        nav button.active { color: var(--primary-dark); }
+        nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
 
         .badge-carrito {
             position: absolute;
             top: 2px;
             right: 4px;
-            background: var(--rojo);
+            background: var(--danger);
             color: white;
             font-size: 0.55rem;
-            padding: 1px 4px;
+            padding: 1px 5px;
             border-radius: 10px;
             font-weight: 700;
         }
 
         header {
-            background: linear-gradient(rgba(44, 62, 80, 0.6), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            padding: 25px 15px;
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+            padding: 24px 18px;
             color: white;
-            text-align: center;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 15px;
+            text-align: left;
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(6, 95, 70, 0.15);
         }
-        header h1 { font-size: 1.2rem; margin-bottom: 4px; }
-        header p { font-size: 0.78rem; opacity: 0.9; }
+        header h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: 2px; }
+        header p { font-size: 0.78rem; opacity: 0.85; }
 
         .menu-hamburguesa-card {
-            background: #f8f9f9;
-            border: 2px solid #d5dbdb;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 14px;
-            padding: 15px;
+            padding: 14px;
             margin-bottom: 16px;
         }
         .btn-hamburguesa {
-            background: var(--oscuro);
+            background: var(--dark);
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             width: 100%;
             justify-content: center;
         }
         .contenido-ods13 {
             display: none;
-            margin-top: 12px;
+            margin-top: 10px;
             padding: 12px;
             background: white;
             border-radius: 10px;
             font-size: 0.8rem;
+            border: 1px solid #e2e8f0;
         }
         .contenido-ods13.activo { display: block; }
 
@@ -271,17 +292,18 @@
         }
         
         .cuadro-resultado {
-            background: #fff;
+            background: #ffffff;
             padding: 14px 10px;
             border-radius: 14px;
-            border: 2px solid #f0f2f5;
+            border: 1px solid #e2e8f0;
             display: flex;
             flex-direction: column;
             gap: 4px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
-        .cuadro-resultado h4 { font-size: 0.78rem; }
-        .porcentaje-txt { font-size: 1.5rem; font-weight: 700; color: var(--oscuro); }
+        .cuadro-resultado h4 { font-size: 0.78rem; color: var(--gray); font-weight: 600; }
+        .porcentaje-txt { font-size: 1.6rem; font-weight: 700; color: var(--dark); }
 
         .seccion-test { display: none; }
         .seccion-test.activa { display: block; }
@@ -289,11 +311,11 @@
         .pregunta-box {
             margin-bottom: 12px;
             padding: 14px;
-            background: #fdfefe;
+            background: #f8fafc;
             border-radius: 12px;
-            border: 1px solid #eef2f5;
+            border: 1px solid #e2e8f0;
         }
-        .pregunta-box p { font-weight: 600; font-size: 0.83rem; margin-bottom: 10px; }
+        .pregunta-box p { font-weight: 600; font-size: 0.83rem; margin-bottom: 10px; color: var(--dark); }
 
         .opcion {
             display: flex;
@@ -303,13 +325,15 @@
             margin: 6px 0;
             border-radius: 10px;
             cursor: pointer;
-            border: 2px solid #eef2f5;
+            border: 1px solid #cbd5e1;
             font-size: 0.78rem;
+            transition: all 0.2s;
         }
-        .opcion input { margin-right: 10px; accent-color: var(--naranja); }
+        .opcion:hover { border-color: var(--primary); background: #ecfdf5; }
+        .opcion input { margin-right: 10px; accent-color: var(--primary); }
 
         .btn-final {
-            background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-oscuro) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
             padding: 12px;
@@ -320,6 +344,7 @@
             margin: 20px auto 10px auto;
             font-weight: 600;
             font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
         }
 
         .grid-medallas {
@@ -329,44 +354,47 @@
             margin-top: 10px;
         }
         .medaling-card {
-            background: #fafbfc;
+            background: #f8fafc;
             padding: 12px 8px;
             border-radius: 12px;
             text-align: center;
-            border: 2px solid #f0f2f5;
+            border: 1px solid #e2e8f0;
             filter: grayscale(100%);
             opacity: 0.4;
+            transition: all 0.3s;
         }
-        .medaling-card.desbloqueada { filter: grayscale(0%); opacity: 1; border-color: var(--naranja); background: #fff; }
+        .medaling-card.desbloqueada { filter: grayscale(0%); opacity: 1; border-color: var(--primary); background: #ecfdf5; }
         .medalla-icon { font-size: 1.5rem; margin-bottom: 3px; }
-        .medalla-title { font-size: 0.7rem; font-weight: 600; }
+        .medalla-title { font-size: 0.7rem; font-weight: 600; color: var(--dark); }
 
         .tip-box-dinamico {
-            background: rgba(44,62,80,0.04);
-            border-left: 3px solid var(--azul);
+            background: #f0fdf4;
+            border-left: 3px solid var(--primary);
             padding: 8px 10px;
             margin-top: 4px;
             display: none;
             font-size: 0.7rem;
-            color: #34495e;
+            color: #166534;
             text-align: left;
+            border-radius: 0 8px 8px 0;
         }
 
         .textarea-comentario {
             width: 100%;
             height: 75px;
             padding: 10px;
-            border: 2px solid #eef2f5;
+            border: 2px solid #e2e8f0;
             border-radius: 10px;
             font-family: inherit;
             resize: none;
-            background: #fafbfc;
+            background: #f8fafc;
             margin-top: 8px;
             font-size: 0.8rem;
         }
+        .textarea-comentario:focus { outline: none; border-color: var(--primary); background: white; }
 
         .btn-comentario {
-            background: var(--azul);
+            background: var(--primary-dark);
             color: white;
             border: none;
             padding: 8px 16px;
@@ -378,8 +406,8 @@
         }
         
         .contenedor-lista-comentarios { margin-top: 15px; max-height: 180px; overflow-y: auto; }
-        .comentario-item { background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 8px; border-left: 3px solid var(--azul); font-size: 0.76rem; text-align: left; }
-        .comentario-meta { font-size: 0.65rem; color: #7f8c8d; display: flex; justify-content: space-between; margin-bottom: 2px; }
+        .comentario-item { background: #f8fafc; padding: 10px; border-radius: 10px; margin-bottom: 8px; border-left: 3px solid var(--primary); font-size: 0.76rem; text-align: left; }
+        .comentario-meta { font-size: 0.65rem; color: var(--gray); display: flex; justify-content: space-between; margin-bottom: 2px; }
 
         .tienda-grid {
             display: grid;
@@ -389,19 +417,19 @@
         }
         .producto-card {
             background: #fff;
-            border: 2px solid #f0f2f5;
+            border: 1px solid #e2e8f0;
             border-radius: 14px;
             padding: 14px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-        .producto-titulo { font-size: 0.9rem; font-weight: 600; color: var(--oscuro); margin-bottom: 4px; }
-        .producto-desc { font-size: 0.75rem; color: #7f8c8d; margin-bottom: 8px; line-height: 1.3; }
+        .producto-titulo { font-size: 0.9rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+        .producto-desc { font-size: 0.75rem; color: var(--gray); margin-bottom: 8px; line-height: 1.3; }
         .producto-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
-        .producto-precio { font-size: 0.95rem; font-weight: 700; color: var(--verde-oscuro); }
+        .producto-precio { font-size: 0.95rem; font-weight: 700; color: var(--primary-dark); }
         .btn-comprar {
-            background: linear-gradient(135deg, var(--verde) 0%, var(--verde-oscuro) 100%);
+            background: var(--primary);
             color: white;
             border: none;
             padding: 6px 12px;
@@ -412,8 +440,8 @@
         }
 
         .carrito-container {
-            background: #fdfefe;
-            border: 2px dashed var(--azul);
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
             border-radius: 14px;
             padding: 15px;
             margin-top: 20px;
@@ -423,11 +451,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
-            border-bottom: 1px solid #eef2f5;
+            border-bottom: 1px solid #e2e8f0;
             font-size: 0.78rem;
         }
         .btn-eliminar-item {
-            background: var(--rojo);
+            background: var(--danger);
             color: white;
             border: none;
             padding: 3px 6px;
@@ -444,7 +472,7 @@
             font-weight: 700;
         }
         .btn-checkout {
-            background: linear-gradient(135deg, var(--azul) 0%, var(--azul-oscuro) 100%);
+            background: var(--dark);
             color: white;
             border: none;
             padding: 10px;
@@ -458,8 +486,8 @@
 
         /* Trivia Interactiva */
         .trivia-interactiva-box {
-            background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%);
-            border: 2px solid #f9e79f;
+            background: linear-gradient(135deg, #fef3c7 100%, #fde68a 0%);
+            border: 1px solid #f59e0b;
             border-radius: 14px;
             padding: 15px;
             margin-top: 15px;
@@ -472,7 +500,7 @@
         }
         .trivia-option-btn {
             background-color: #ffffff;
-            border: 2px solid #e9ecef;
+            border: 1px solid #fcd34d;
             padding: 8px 12px;
             border-radius: 8px;
             cursor: pointer;
@@ -480,20 +508,20 @@
             text-align: left;
             font-family: inherit;
         }
-        .trivia-option-btn.correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; }
-        .trivia-option-btn.incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+        .trivia-option-btn.correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46; }
+        .trivia-option-btn.incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
 
         .retos-card {
-            background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%);
-            border: 2px solid #f9e79f;
+            background: linear-gradient(135deg, #fef3c7 100%, #fde68a 0%);
+            border: 1px solid #f59e0b;
             border-radius: 14px;
             padding: 15px;
             margin-top: 15px;
         }
 
         .evidencia-card {
-            background: linear-gradient(135deg, #e8f8f5 0%, #d1f2eb 100%);
-            border: 2px solid #a3e4d7;
+            background: linear-gradient(135deg, #ecfdf5 100%, #d1fae5 0%);
+            border: 1px solid #34d399;
             border-radius: 14px;
             padding: 15px;
             margin-top: 15px;
@@ -501,8 +529,8 @@
 
         /* Rango y Niveles */
         .rango-card {
-            background: linear-gradient(135deg, #ebf5fb 0%, #d4efdf 100%);
-            border: 2px solid #85c1e9;
+            background: linear-gradient(135deg, #ecfdf5 0%, #e0f2fe 100%);
+            border: 1px solid #6ee7b7;
             border-radius: 14px;
             padding: 15px;
             margin-bottom: 16px;
@@ -521,7 +549,7 @@
             background: white;
             padding: 8px 12px;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
         }
         .barra-progreso-container {
             width: 100%;
@@ -533,12 +561,12 @@
         }
         .barra-progreso-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--verde) 0%, var(--azul) 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, #0284c7 100%);
             width: 0%;
             transition: width 0.6s ease;
         }
         .streak-pill {
-            background: #f39c12;
+            background: var(--accent);
             color: white;
             padding: 4px 10px;
             border-radius: 15px;
@@ -557,9 +585,9 @@
 
         <!-- SECCIÓN LOGIN -->
         <div id="login-section" class="auth-card">
-            <div style="font-size: 2.5rem; margin-bottom: 6px;">🌿</div>
-            <h2 style="color: var(--naranja-oscuro); font-size: 1.3rem;">EcoImpacto UTSC</h2>
-            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 20px;">Acción por el Clima (ODS 13)</p>
+            <div style="font-size: 2.6rem; margin-bottom: 6px;">🌿</div>
+            <h2 style="color: var(--primary-dark); font-size: 1.35rem; font-weight: 700;">EcoImpacto UTSC</h2>
+            <p style="color: var(--gray); font-size: 0.81rem; margin-bottom: 20px;">Acción por el Clima (ODS 13)</p>
             
             <div id="login-inputs">
                 <input type="email" id="login-email" class="input-login" placeholder="Correo electrónico">
@@ -570,46 +598,46 @@
             </div>
             
             <button class="btn-google" onclick="loginConGoogle()">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="14" alt="Google"> Continuar con Google
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="15" alt="Google"> Continuar con Google
             </button>
             
-            <button class="btn-google" style="background-color: #4267B2; color: white;" onclick="loginConFacebook()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="14" alt="Facebook"> Continuar con Facebook
+            <button class="btn-google" style="background-color: #1877f2; color: white; border-color: #1877f2;" onclick="loginConFacebook()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="15" alt="Facebook"> Continuar con Facebook
             </button>
 
-            <p style="font-size: 0.78rem; margin-top: 15px; color: #95a5a6;">¿No tienes cuenta? <a href="#" onclick="irARegistro()" style="color: var(--naranja); font-weight: bold; text-decoration: none;">Regístrate</a></p>
+            <p style="font-size: 0.78rem; margin-top: 18px; color: var(--gray);">¿No tienes cuenta? <a href="#" onclick="irARegistro()" style="color: var(--primary); font-weight: 700; text-decoration: none;">Regístrate</a></p>
         </div>
 
         <!-- SECCIÓN TOKEN -->
         <div id="token-section" class="auth-card" style="display: none;">
-            <div style="font-size: 2.5rem; margin-bottom: 6px;">🔑</div>
-            <h2 style="font-size: 1.2rem;">Seguridad UTSC</h2>
-            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 12px;">Token temporal generado:</p>
-            <div style="background: #ebf5fb; padding: 12px; border-radius: 10px; margin-bottom: 15px; font-weight: bold; font-size: 1.2rem; color: var(--azul-oscuro); border: 2px dashed var(--azul);">
+            <div style="font-size: 2.6rem; margin-bottom: 6px;">🔑</div>
+            <h2 style="font-size: 1.25rem;">Seguridad UTSC</h2>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-bottom: 12px;">Token temporal generado:</p>
+            <div style="background: #f0fdf4; padding: 12px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; font-size: 1.2rem; color: var(--primary-dark); border: 2px dashed var(--primary);">
                 <span id="display-token-id">0000</span>
             </div>
             <input type="text" id="input-token-value" class="input-login" placeholder="4 dígitos" maxlength="4" style="text-align: center; font-size: 1.1rem; font-weight: 600; letter-spacing: 2px;">
             <button class="btn-auth" onclick="validarTokenEscrito()">VERIFICAR</button>
-            <p style="margin-top: 12px;"><a href="#" onclick="irALogin()" style="color: #95a5a6; text-decoration: none; font-size: 0.8rem;">← Cancelar</a></p>
+            <p style="margin-top: 14px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.8rem;">← Cancelar</a></p>
         </div>
 
         <!-- SECCIÓN REGISTRO -->
         <div id="register-section" class="auth-card" style="display: none;">
-            <h2 style="font-size: 1.2rem;">Únete al cambio</h2>
-            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 15px;">Crea tu cuenta nueva</p>
+            <h2 style="font-size: 1.25rem;">Únete al cambio</h2>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-bottom: 16px;">Crea tu cuenta nueva</p>
             <input type="email" id="reg-email" class="input-login" placeholder="Correo electrónico">
             <input type="password" id="reg-pass" class="input-login" placeholder="Contraseña (mín. 8 caracteres)">
             <button class="btn-auth" onclick="registrarNuevoUsuario()">CREAR CUENTA</button>
-            <p style="margin-top: 12px;"><a href="#" onclick="irALogin()" style="color: #95a5a6; text-decoration: none; font-size: 0.8rem;">← Volver</a></p>
+            <p style="margin-top: 14px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.8rem;">← Volver</a></p>
         </div>
 
         <!-- SECCIÓN RECUPERAR -->
         <div id="recover-section" class="auth-card" style="display: none;">
-            <h2 style="font-size: 1.2rem;">Recuperar Cuenta</h2>
-            <p style="color: #7f8c8d; font-size: 0.8rem; margin-bottom: 15px;">Ingresa tu correo registrado</p>
+            <h2 style="font-size: 1.25rem;">Recuperar Cuenta</h2>
+            <p style="color: var(--gray); font-size: 0.8rem; margin-bottom: 16px;">Ingresa tu correo registrado</p>
             <input type="email" id="recover-email" class="input-login" placeholder="Correo electrónico">
             <button class="btn-auth" onclick="recuperarPassword()">ENVIAR ENLACE</button>
-            <p style="margin-top: 12px;"><a href="#" onclick="irALogin()" style="color: #95a5a6; text-decoration: none; font-size: 0.8rem;">← Volver</a></p>
+            <p style="margin-top: 14px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.8rem;">← Volver</a></p>
         </div>
 
         <!-- APLICACIÓN PRINCIPAL PROTEGIDA -->
@@ -628,11 +656,11 @@
                             <div class="rango-badge-icon" id="rango-icono">🌱</div>
                             <div style="flex: 1;">
                                 <div style="display: flex; align-items: center; justify-content: space-between;">
-                                    <h3 id="rango-titulo" style="color: #1b4f72; font-size: 0.95rem;">Novato Verde</h3>
+                                    <h3 id="rango-titulo" style="color: var(--primary-dark); font-size: 0.95rem; font-weight: 700;">Novato Verde</h3>
                                     <div class="streak-pill">🔥 <span id="streak-counter">1</span> Días</div>
                                 </div>
-                                <p id="rango-descripcion" style="font-size: 0.72rem; color: #5d6d7e; margin: 4px 0;">Sube de nivel completando tests.</p>
-                                <div style="font-size: 0.7rem; font-weight: 600;">Progreso: <span id="rango-porcentaje-txt">0%</span></div>
+                                <p id="rango-descripcion" style="font-size: 0.72rem; color: var(--gray); margin: 3px 0;">Sube de nivel completando tests.</p>
+                                <div style="font-size: 0.7rem; font-weight: 600; color: var(--dark);">Progreso: <span id="rango-porcentaje-txt">0%</span></div>
                                 <div class="barra-progreso-container">
                                     <div class="barra-progreso-fill" id="rango-barra-fill"></div>
                                 </div>
@@ -645,17 +673,17 @@
                             <span>☰</span> Información Clave ODS 13
                         </button>
                         <div id="panel-ods13" class="contenido-ods13">
-                            <p style="margin-bottom: 6px;">El ODS 13 exige medidas urgentes contra el cambio climático.</p>
-                            <ul style="margin-left: 15px; display: flex; flex-direction: column; gap: 3px; color: #555;">
+                            <p style="margin-bottom: 6px; color: var(--dark);">El ODS 13 exige medidas urgentes contra el cambio climático.</p>
+                            <ul style="margin-left: 15px; display: flex; flex-direction: column; gap: 3px; color: var(--gray);">
                                 <li>Mitigación y ahorro energético.</li>
                                 <li>Reducción de plásticos en UTSC.</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="card" style="background: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%); color: white;">
-                        <h3 style="color: var(--naranja); font-size: 1rem; margin-bottom: 4px;">🌤️ Clima Local (API)</h3>
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; margin-top: 6px;">
+                    <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white;">
+                        <h3 style="color: var(--accent); font-size: 0.95rem; margin-bottom: 4px;">🌤️ Clima Local (API)</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.06); padding: 10px; border-radius: 10px; margin-top: 6px;">
                             <div>
                                 <strong style="font-size: 0.85rem; display: block;">Santa Catarina, MX</strong>
                                 <span id="txt-api-desc" style="font-size: 0.72rem; opacity: 0.85;">Sincronizando...</span>
@@ -665,7 +693,7 @@
                     </div>
 
                     <div class="card">
-                        <h2 style="font-size: 1rem;">📊 Estado Actual de tu Huella</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">📊 Estado Actual de tu Huella</h2>
                         <div class="grid-impactos">
                             <div id="box-general" class="cuadro-resultado"><h4>General 🌳</h4><span class="porcentaje-txt" id="txt-general">--%</span><div id="tip-general" class="tip-box-dinamico"></div></div>
                             <div id="box-deporte" class="cuadro-resultado"><h4>Deporte 🏀</h4><span class="porcentaje-txt" id="txt-deporte">--%</span><div id="tip-deporte" class="tip-box-dinamico"></div></div>
@@ -677,17 +705,17 @@
                     <!-- Trivia Interactiva -->
                     <div class="trivia-interactiva-box">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                            <h3 style="color: #9a7d0a; font-size: 0.95rem; margin:0;">💡 EcoTrivia Diaria</h3>
-                            <span style="font-size: 0.78rem; font-weight: 600; color: #7d6608;">Pts: <span id="trivia-score">0</span></span>
+                            <h3 style="color: #b45309; font-size: 0.9rem; font-weight: 700; margin:0;">💡 EcoTrivia Diaria</h3>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #b45309;">Pts: <span id="trivia-score">0</span></span>
                         </div>
-                        <div id="trivia-question-text" style="font-size: 0.82rem; color: #7d6608; font-weight: 600; margin-bottom: 8px;">Cargando...</div>
+                        <div id="trivia-question-text" style="font-size: 0.8rem; color: #78350f; font-weight: 600; margin-bottom: 8px;">Cargando...</div>
                         <div class="trivia-options-container" id="trivia-options-group"></div>
-                        <div id="trivia-feedback" style="font-size: 0.78rem; font-weight: bold; margin-bottom: 6px; min-height: 15px;"></div>
-                        <button id="trivia-next-btn" class="btn-auth" style="background: #d4ac0d; margin-top: 0; display: none; padding: 8px; font-size: 0.8rem;" onclick="siguientePreguntaTrivia()">Siguiente</button>
+                        <div id="trivia-feedback" style="font-size: 0.75rem; font-weight: bold; margin-bottom: 6px; min-height: 15px;"></div>
+                        <button id="trivia-next-btn" class="btn-auth" style="background: #f59e0b; margin-top: 0; display: none; padding: 8px; font-size: 0.8rem;" onclick="siguientePreguntaTrivia()">Siguiente</button>
                     </div>
 
                     <div class="card" style="margin-top: 15px;">
-                        <h2 style="font-size: 1rem;">🏆 Logros</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">🏆 Logros</h2>
                         <div class="grid-medallas">
                             <div id="med-general" class="medaling-card"><div class="medalla-icon">🌳</div><div class="medalla-title">Guardián</div></div>
                             <div id="med-deporte" class="medaling-card"><div class="medalla-icon">⚡</div><div class="medalla-title">Atleta</div></div>
@@ -697,7 +725,7 @@
                     </div>
 
                     <div class="card">
-                        <h2 style="font-size: 1rem;">💬 Comunidad</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">💬 Comunidad</h2>
                         <textarea id="input-comentario" class="textarea-comentario" placeholder="Escribe tu opinión..."></textarea>
                         <div style="text-align: right;"><button class="btn-comentario" onclick="publicarComentario()">Enviar</button></div>
                         <div id="lista-comentarios" class="contenedor-lista-comentarios"></div>
@@ -707,7 +735,7 @@
                 <!-- SECCIÓN TIENDA -->
                 <section id="sec-tienda" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">🛍 Tienda Ecológica</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">🛍 Tienda Ecológica</h2>
                         <div class="target-box">Alternativas ecológicas para reducir plásticos.</div>
                         
                         <div class="tienda-grid">
@@ -738,8 +766,8 @@
                         </div>
 
                         <div class="carrito-container">
-                            <h3 style="color: var(--azul-oscuro); font-size: 0.9rem; margin-bottom: 8px;">🛒 Tu Carrito</h3>
-                            <div id="lista-carrito"><p style="color: #95a5a6; font-size: 0.78rem; text-align: center;">Vacío.</p></div>
+                            <h3 style="color: var(--dark); font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">🛒 Tu Carrito</h3>
+                            <div id="lista-carrito"><p style="color: var(--gray); font-size: 0.78rem; text-align: center;">Vacío.</p></div>
                             <div class="carrito-total"><span>Total:</span><span id="carrito-precio-total">$0 MXN</span></div>
                             <button class="btn-checkout" onclick="procesarCompra()">FINALIZAR COMPRA</button>
                         </div>
@@ -749,9 +777,9 @@
                 <!-- SECCIÓN GENERAL (10 PREGUNTAS COMPLETAS) -->
                 <section id="sec-general" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">🌳 Cuestionario General</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">🌳 Cuestionario General</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.85rem; display: none;" id="timer-general">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-general">Tiempo: 60s</div>
                         <div id="contenido-test-general">
                             <form id="form-general">
                                 <div class="pregunta-box"><p>1. ¿Cómo te desplazas a la universidad?</p><label class="opcion"><input type="radio" name="g1" value="10"> Caminando / Bici</label><label class="opcion"><input type="radio" name="g1" value="5"> Público</label><label class="opcion"><input type="radio" name="g1" value="0"> Auto</label></div>
@@ -767,16 +795,16 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('general', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-general" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.85rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-general" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN DEPORTE (10 PREGUNTAS COMPLETAS) -->
                 <section id="sec-deporte" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">🏀 Deporte</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">🏀 Deporte</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.85rem; display: none;" id="timer-deporte">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-deporte">Tiempo: 60s</div>
                         <div id="contenido-test-deporte">
                             <form id="form-deporte">
                                 <div class="pregunta-box"><p>1. ¿Entrenas al aire libre?</p><label class="opcion"><input type="radio" name="d1" value="10"> Sí</label><label class="opcion"><input type="radio" name="d1" value="0"> No</label></div>
@@ -792,16 +820,16 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('deporte', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-deporte" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.85rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-deporte" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN ALIMENTACIÓN (10 PREGUNTAS COMPLETAS) -->
                 <section id="sec-alimentacion" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">🍎 Comida</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">🍎 Comida</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.85rem; display: none;" id="timer-alimentacion">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-alimentacion">Tiempo: 60s</div>
                         <div id="contenido-test-alimentacion">
                             <form id="form-alimentacion">
                                 <div class="pregunta-box"><p>1. ¿Consumes alimentos locales?</p><label class="opcion"><input type="radio" name="a1" value="10"> Sí</label><label class="opcion"><input type="radio" name="a1" value="0"> No</label></div>
@@ -817,16 +845,16 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('alimentacion', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-alimentacion" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.85rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-alimentacion" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN MODA (10 PREGUNTAS COMPLETAS) -->
                 <section id="sec-moda" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">👕 Moda</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">👕 Moda</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.85rem; display: none;" id="timer-moda">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-moda">Tiempo: 60s</div>
                         <div id="contenido-test-moda">
                             <form id="form-moda">
                                 <div class="pregunta-box"><p>1. ¿Compras ropa de segunda mano?</p><label class="opcion"><input type="radio" name="m1" value="10"> Sí</label><label class="opcion"><input type="radio" name="m1" value="0"> No</label></div>
@@ -842,26 +870,26 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('moda', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-moda" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.85rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-moda" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN RETOS -->
                 <section id="sec-retos" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">🎯 Retos ODS 13</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">🎯 Retos ODS 13</h2>
                         <div class="retos-card">
-                            <h3 id="reto-semanal-titulo" style="color: #9a7d0a; font-size: 0.9rem; margin-bottom: 4px;">🌱 Reto Semanal</h3>
-                            <p id="reto-semanal-desc" style="font-size: 0.8rem; color: #7d6608; margin-bottom: 8px;">Cargando...</p>
-                            <button class="btn-auth" style="background: #d4ac0d; margin-top: 0; font-size: 0.8rem;" onclick="unirseRetoSemanal()">PARTICIPAR</button>
+                            <h3 id="reto-semanal-titulo" style="color: #b45309; font-size: 0.88rem; font-weight: 700; margin-bottom: 4px;">🌱 Reto Semanal</h3>
+                            <p id="reto-semanal-desc" style="font-size: 0.78rem; color: #78350f; margin-bottom: 8px;">Cargando...</p>
+                            <button class="btn-auth" style="background: #f59e0b; margin-top: 0; font-size: 0.8rem;" onclick="unirseRetoSemanal()">PARTICIPAR</button>
                         </div>
 
                         <div class="evidencia-card" style="margin-top: 15px;">
-                            <h3 style="color: #117a65; font-size: 0.9rem; margin-bottom: 4px;">📸 Subir Evidencia</h3>
+                            <h3 style="color: #065f46; font-size: 0.88rem; font-weight: 700; margin-bottom: 4px;">📸 Subir Evidencia</h3>
                             <input type="text" id="evidencia-titulo" class="input-login" placeholder="Título" style="background: white; font-size: 0.8rem;">
                             <textarea id="evidencia-desc" class="textarea-comentario" placeholder="Descripción..." style="background: white; height: 60px;"></textarea>
-                            <input type="file" id="evidencia-archivo" accept="image/*" capture="environment" style="font-size: 0.8rem; margin: 8px 0; width: 100%;">
-                            <button class="btn-auth" style="background: #1abc9c; margin-top: 0; font-size: 0.8rem;" onclick="subirEvidenciaAccion()">SUBIR</button>
+                            <input type="file" id="evidencia-archivo" accept="image/*" capture="environment" style="font-size: 0.78rem; margin: 8px 0; width: 100%;">
+                            <button class="btn-auth" style="background: var(--primary); margin-top: 0; font-size: 0.8rem;" onclick="subirEvidenciaAccion()">SUBIR</button>
                         </div>
                     </div>
                 </section>
@@ -869,29 +897,29 @@
                 <!-- SECCIÓN QUIZ SEMANAL -->
                 <section id="sec-cuestionario-semanal" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem;">⏱️ Quiz Semanal</h2>
-                        <div id="cuestionario-timer" style="font-weight: bold; color: #e74c3c; margin-bottom: 10px; font-size: 0.85rem;">Tiempo: 60s</div>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">⏱️ Quiz Semanal</h2>
+                        <div id="cuestionario-timer" style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem;">Tiempo: 60s</div>
                         <div id="quiz-contenido-activo">
                             <form id="form-cuestionario-semanal">
                                 <div class="pregunta-box"><p>1. ¿Acción que reduce tu huella?</p><label class="opcion"><input type="radio" name="cs1" value="correcta"> Usar bici</label><label class="opcion"><input type="radio" name="cs1" value="incorrecta"> Dejar luces</label></div>
                             </form>
                             <button type="button" class="btn-final" onclick="enviarCuestionarioSemanal(false)">Enviar</button>
                         </div>
-                        <div id="quiz-mensaje-bloqueo" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.85rem; color: #7f8c8d;">Ya respondiste esta semana.</p></div>
+                        <div id="quiz-mensaje-bloqueo" style="display: none; text-align: center; padding: 15px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN PERFIL -->
                 <section id="sec-cuenta" class="seccion-test">
                     <div class="card" style="text-align: center;">
-                        <div style="font-size: 2.5rem; margin-bottom: 6px;">👤</div>
-                        <h2 style="font-size: 1.1rem;">Mi Panel UTSC</h2>
-                        <div class="input-login" id="info-correo" style="font-size: 0.82rem; pointer-events: none;">--</div>
-                        <div style="margin: 15px auto; max-width: 200px; background: #f8fafc; padding: 10px; border-radius: 10px; border: 2px dashed #cbd5e1;">
-                            <div style="font-size: 0.75rem; color: #64748b; font-weight: 600;">ID Eco-UTSC</div>
-                            <div id="qr-id-txt" style="font-size: 0.85rem; font-weight: bold; color: var(--oscuro);">--</div>
+                        <div style="font-size: 2.6rem; margin-bottom: 6px;">👤</div>
+                        <h2 style="font-size: 1.05rem; font-weight: 700;">Mi Panel UTSC</h2>
+                        <div class="input-login" id="info-correo" style="font-size: 0.8rem; pointer-events: none;">--</div>
+                        <div style="margin: 15px auto; max-width: 200px; background: #f8fafc; padding: 10px; border-radius: 12px; border: 2px dashed #cbd5e1;">
+                            <div style="font-size: 0.72rem; color: var(--gray); font-weight: 600;">ID Eco-UTSC</div>
+                            <div id="qr-id-txt" style="font-size: 0.82rem; font-weight: bold; color: var(--dark);">--</div>
                         </div>
-                        <button class="btn-auth" style="background: #95a5a6; font-size: 0.85rem;" onclick="cerrarSesion()">CERRAR SESIÓN</button>
+                        <button class="btn-auth" style="background: var(--gray); font-size: 0.85rem;" onclick="cerrarSesion()">CERRAR SESIÓN</button>
                     </div>
                 </section>
             </div>
@@ -1249,7 +1277,7 @@
         const badge = document.getElementById('badge-carrito');
         const totalSpan = document.getElementById('carrito-precio-total');
         if (carritoCompras.length === 0) {
-            contenedor.innerHTML = "<p style='color: #95a5a6; font-size: 0.78rem; text-align: center;'>Vacío.</p>";
+            contenedor.innerHTML = "<p style='color: var(--gray); font-size: 0.78rem; text-align: center;'>Vacío.</p>";
             badge.style.display = 'none';
             totalSpan.innerText = "$0 MXN";
             return;
