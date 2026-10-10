@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EcoImpacto UTSC - Mobile App</title>
+    <title>EcoImpacto UTSC - App Móvil</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -38,7 +38,6 @@
             overflow: hidden;
         }
 
-        /* MARCO TIPO SMARTPHONE MODERNO Y ELEGANTE */
         .phone-container {
             width: 100%;
             max-width: 414px;
@@ -60,15 +59,14 @@
             }
         }
 
-        /* ÁREA DE CONTENIDO CON ESPACIADO CUIDADO */
         .phone-content {
             flex: 1;
             overflow-y: auto;
-            padding: 20px 16px 100px 16px;
+            padding: 20px 16px 110px 16px;
             -webkit-overflow-scrolling: touch;
         }
 
-        .phone-content::-webkit-scrollbar { width: 5px; }
+        .phone-content::-webkit-scrollbar { width: 4px; }
         .phone-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
         .auth-card {
@@ -87,38 +85,38 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 20px; /* Evita que todo se vea amontonado */
+            gap: 18px;
         }
 
         .card {
             background: #ffffff;
             border-radius: var(--radius);
-            padding: 24px 20px;
+            padding: 22px 18px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-light);
+            margin-bottom: 4px;
         }
 
         .target-box {
             background: var(--primary-bg);
             border-left: 5px solid var(--primary-light);
-            padding: 16px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            font-size: 0.84rem;
             color: #065f46;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .input-login {
             width: 100%;
-            padding: 14px 18px;
-            margin: 10px 0;
+            padding: 13px 16px;
+            margin: 8px 0;
             border: 2px solid var(--gray-light);
-            border-radius: 16px;
-            font-size: 0.95rem;
+            border-radius: 14px;
+            font-size: 0.92rem;
             background: #f8fafc;
             font-family: inherit;
-            transition: all 0.25s ease;
         }
         .input-login:focus {
             outline: none;
@@ -131,57 +129,54 @@
             background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
             color: white;
             border: none;
-            padding: 14px;
+            padding: 13px;
             width: 100%;
-            border-radius: 16px;
+            border-radius: 14px;
             cursor: pointer;
             font-weight: 600;
-            margin-top: 15px;
-            font-size: 1rem;
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
-            transition: transform 0.15s ease;
+            margin-top: 12px;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2);
         }
-        .btn-auth:active { transform: scale(0.97); }
 
         .btn-google {
             background: white;
             color: #334155;
             border: 2px solid var(--gray-light);
-            padding: 12px;
+            padding: 11px;
             width: 100%;
-            border-radius: 16px;
+            border-radius: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             font-weight: 600;
-            margin-top: 12px;
-            font-size: 0.9rem;
+            margin-top: 10px;
+            font-size: 0.88rem;
         }
 
         .toggle-pass-container {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--gray);
             cursor: pointer;
             display: flex;
             align-items: center;
-            margin: 10px 4px;
+            margin: 8px 4px;
         }
-        .toggle-pass-container input { margin-right: 8px; accent-color: var(--primary-light); width: 16px; height: 16px; }
+        .toggle-pass-container input { margin-right: 8px; accent-color: var(--primary-light); }
 
         .link-recuperar {
             display: inline-block;
-            margin-top: 15px;
-            font-size: 0.85rem;
+            margin-top: 12px;
+            font-size: 0.82rem;
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
         }
 
-        /* NAVEGACIÓN INFERIOR ESTILO APP NATIVA */
         nav {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-around;
@@ -192,7 +187,7 @@
             z-index: 1000;
             box-shadow: 0 -10px 30px rgba(0,0,0,0.06);
             border-top: 1px solid var(--gray-light);
-            padding: 10px 6px;
+            padding: 8px 4px;
         }
 
         nav button {
@@ -200,27 +195,26 @@
             color: var(--gray);
             border: none;
             padding: 6px 2px;
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.55rem;
+            font-size: 0.52rem;
             font-weight: 600;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             flex: 1;
-            min-width: 42px;
+            min-width: 40px;
             position: relative;
-            transition: color 0.2s ease;
         }
-        nav button span { font-size: 1.25rem; }
+        nav button span { font-size: 1.2rem; }
         nav button.active { color: var(--primary); }
         nav button.active::after {
             content: '';
             position: absolute;
             bottom: 0;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: var(--primary);
             border-radius: 50%;
         }
@@ -231,55 +225,55 @@
             right: 2px;
             background: var(--danger);
             color: white;
-            font-size: 0.6rem;
-            padding: 2px 6px;
-            border-radius: 12px;
+            font-size: 0.58rem;
+            padding: 1px 5px;
+            border-radius: 10px;
             font-weight: 700;
         }
 
         header {
             background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-            padding: 28px 20px;
+            padding: 24px 18px;
             color: white;
             text-align: left;
-            border-radius: 0 0 28px 28px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(6, 95, 70, 0.2);
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 20px rgba(6, 95, 70, 0.15);
         }
-        header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
-        header p { font-size: 0.82rem; opacity: 0.9; }
+        header h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 3px; }
+        header p { font-size: 0.8rem; opacity: 0.9; }
 
         .menu-hamburguesa-card {
             background: #ffffff;
             border: 1px solid var(--gray-light);
             border-radius: var(--radius);
-            padding: 18px;
+            padding: 16px;
             box-shadow: var(--shadow);
         }
         .btn-hamburguesa {
             background: var(--dark);
             color: white;
             border: none;
-            padding: 12px 16px;
-            border-radius: 14px;
+            padding: 11px 14px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             justify-content: center;
         }
         .contenido-ods13 {
             display: none;
-            margin-top: 14px;
-            padding: 14px;
+            margin-top: 12px;
+            padding: 12px;
             background: var(--light);
-            border-radius: 14px;
-            font-size: 0.85rem;
+            border-radius: 12px;
+            font-size: 0.82rem;
             border: 1px solid var(--gray-light);
-            line-height: 1.5;
+            line-height: 1.4;
         }
         .contenido-ods13.activo { display: block; }
 
@@ -287,75 +281,75 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-top: 15px;
+            margin-top: 12px;
         }
         
         .cuadro-resultado {
             background: #ffffff;
-            padding: 18px 12px;
-            border-radius: 18px;
+            padding: 16px 10px;
+            border-radius: 16px;
             border: 1px solid var(--gray-light);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
-        .cuadro-resultado h4 { font-size: 0.82rem; color: var(--gray); font-weight: 600; }
-        .porcentaje-txt { font-size: 1.8rem; font-weight: 700; color: var(--dark); }
+        .cuadro-resultado h4 { font-size: 0.8rem; color: var(--gray); font-weight: 600; }
+        .porcentaje-txt { font-size: 1.7rem; font-weight: 700; color: var(--dark); }
 
         .seccion-test { display: none; }
         .seccion-test.activa { display: block; }
 
         .pregunta-box {
-            margin-bottom: 16px;
-            padding: 18px;
+            margin-bottom: 14px;
+            padding: 16px;
             background: #f8fafc;
-            border-radius: 18px;
+            border-radius: 16px;
             border: 1px solid var(--gray-light);
         }
-        .pregunta-box p { font-weight: 600; font-size: 0.88rem; margin-bottom: 12px; color: var(--dark); line-height: 1.4; }
+        .pregunta-box p { font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; color: var(--dark); line-height: 1.4; }
 
         .opcion {
             display: flex;
             align-items: center;
             background: white;
-            padding: 12px 14px;
-            margin: 8px 0;
+            padding: 11px 14px;
+            margin: 6px 0;
             border-radius: 12px;
             cursor: pointer;
             border: 1.5px solid var(--gray-light);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             transition: all 0.2s ease;
         }
         .opcion:hover { border-color: var(--primary-light); background: var(--primary-bg); }
-        .opcion input { margin-right: 12px; accent-color: var(--primary-light); width: 16px; height: 16px; }
+        .opcion input { margin-right: 10px; accent-color: var(--primary-light); width: 16px; height: 16px; }
 
         .btn-final {
             background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
             color: white;
             border: none;
-            padding: 14px;
-            border-radius: 16px;
+            padding: 13px;
+            border-radius: 14px;
             cursor: pointer;
             display: block;
             width: 100%;
-            margin: 25px auto 10px auto;
+            margin: 20px auto 10px auto;
             font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+            font-size: 0.92rem;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2);
         }
 
         .grid-medallas {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 15px;
+            gap: 10px;
+            margin-top: 12px;
         }
         .medaling-card {
             background: #f8fafc;
-            padding: 16px 10px;
-            border-radius: 18px;
+            padding: 14px 8px;
+            border-radius: 16px;
             text-align: center;
             border: 1px solid var(--gray-light);
             filter: grayscale(100%);
@@ -363,33 +357,33 @@
             transition: all 0.3s ease;
         }
         .medaling-card.desbloqueada { filter: grayscale(0%); opacity: 1; border-color: var(--primary-light); background: var(--primary-bg); }
-        .medalla-icon { font-size: 1.8rem; margin-bottom: 6px; }
-        .medalla-title { font-size: 0.75rem; font-weight: 700; color: var(--dark); }
+        .medalla-icon { font-size: 1.6rem; margin-bottom: 4px; }
+        .medalla-title { font-size: 0.72rem; font-weight: 700; color: var(--dark); }
 
         .tip-box-dinamico {
             background: var(--primary-bg);
             border-left: 3px solid var(--primary-light);
-            padding: 10px 12px;
-            margin-top: 8px;
+            padding: 8px 10px;
+            margin-top: 6px;
             display: none;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #065f46;
             text-align: left;
-            border-radius: 0 10px 10px 0;
-            line-height: 1.4;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.3;
         }
 
         .textarea-comentario {
             width: 100%;
-            height: 90px;
-            padding: 14px;
+            height: 80px;
+            padding: 12px;
             border: 2px solid var(--gray-light);
-            border-radius: 14px;
+            border-radius: 12px;
             font-family: inherit;
             resize: none;
             background: #f8fafc;
-            margin-top: 10px;
-            font-size: 0.85rem;
+            margin-top: 8px;
+            font-size: 0.82rem;
         }
         .textarea-comentario:focus { outline: none; border-color: var(--primary-light); background: white; }
 
@@ -397,121 +391,120 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: 12px;
+            padding: 9px 16px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
-            font-size: 0.82rem;
+            margin-top: 8px;
+            font-size: 0.8rem;
         }
         
-        .contenedor-lista-comentarios { margin-top: 18px; max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .comentario-item { background: #f8fafc; padding: 12px 14px; border-radius: 14px; border-left: 3px solid var(--primary); font-size: 0.8rem; text-align: left; border: 1px solid var(--gray-light); }
-        .comentario-meta { font-size: 0.7rem; color: var(--gray); display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: 600; }
+        .contenedor-lista-comentarios { margin-top: 15px; max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+        .comentario-item { background: #f8fafc; padding: 10px 12px; border-radius: 12px; border-left: 3px solid var(--primary); font-size: 0.78rem; text-align: left; border: 1px solid var(--gray-light); }
+        .comentario-meta { font-size: 0.68rem; color: var(--gray); display: flex; justify-content: space-between; margin-bottom: 3px; font-weight: 600; }
 
         .tienda-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 14px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 12px;
         }
         .producto-card {
             background: #fff;
             border: 1px solid var(--gray-light);
-            border-radius: 18px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
-        .producto-titulo { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
-        .producto-desc { font-size: 0.78rem; color: var(--gray); margin-bottom: 12px; line-height: 1.4; }
-        .producto-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
-        .producto-precio { font-size: 1rem; font-weight: 700; color: var(--primary); }
+        .producto-titulo { font-size: 0.92rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .producto-desc { font-size: 0.76rem; color: var(--gray); margin-bottom: 10px; line-height: 1.3; }
+        .producto-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+        .producto-precio { font-size: 0.95rem; font-weight: 700; color: var(--primary); }
         .btn-comprar {
             background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
             color: white;
             border: none;
-            padding: 8px 14px;
-            border-radius: 12px;
+            padding: 7px 12px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
         .carrito-container {
             background: #f8fafc;
             border: 2px dashed #cbd5e1;
-            border-radius: 18px;
-            padding: 18px;
-            margin-top: 25px;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 20px;
         }
         .carrito-item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid var(--gray-light);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
         }
         .btn-eliminar-item {
             background: var(--danger);
             color: white;
             border: none;
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 3px 6px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
         }
         .carrito-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
-            font-size: 1rem;
+            margin-top: 12px;
+            font-size: 0.95rem;
             font-weight: 700;
         }
         .btn-checkout {
             background: var(--dark);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 11px;
             width: 100%;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 15px;
-            font-size: 0.9rem;
+            margin-top: 12px;
+            font-size: 0.88rem;
         }
 
-        /* TRIVIA CORREGIDA Y ESPACIADA (Solución al amontonamiento) */
         .trivia-interactiva-box {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border: 1px solid #f59e0b;
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 18px;
             box-shadow: var(--shadow);
         }
         .trivia-options-container {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Separación correcta entre botones */
-            margin: 15px 0;
+            gap: 10px;
+            margin: 12px 0;
         }
         .trivia-option-btn {
             background-color: #ffffff;
             border: 1.5px solid #fcd34d;
-            padding: 12px 16px;
-            border-radius: 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
             text-align: left;
             font-family: inherit;
             color: #78350f;
-            transition: all 0.2s ease;
             width: 100%;
+            transition: all 0.2s ease;
         }
         .trivia-option-btn:hover { background-color: #fffbeb; border-color: #f59e0b; }
         .trivia-option-btn.correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46; }
@@ -521,46 +514,45 @@
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border: 1px solid #f59e0b;
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 18px;
         }
 
         .evidencia-card {
             background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
             border: 1px solid #34d399;
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 18px;
         }
 
-        /* Rango y Niveles */
         .rango-card {
             background: linear-gradient(135deg, #ecfdf5 0%, #e0f2fe 100%);
             border: 1px solid #6ee7b7;
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 18px;
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
         .rango-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
             width: 100%;
         }
         .rango-badge-icon {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             background: white;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .barra-progreso-container {
             width: 100%;
             background: #e2e8f0;
-            border-radius: 10px;
-            height: 10px;
-            margin-top: 8px;
+            border-radius: 8px;
+            height: 8px;
+            margin-top: 6px;
             overflow: hidden;
         }
         .barra-progreso-fill {
@@ -572,13 +564,13 @@
         .streak-pill {
             background: var(--accent);
             color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 18px;
+            font-size: 0.72rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
     </style>
 </head>
@@ -589,9 +581,9 @@
 
         <!-- SECCIÓN LOGIN -->
         <div id="login-section" class="auth-card">
-            <div style="font-size: 3rem; margin-bottom: 8px;">🌿</div>
-            <h2 style="color: var(--primary); font-size: 1.4rem; font-weight: 700;">EcoImpacto UTSC</h2>
-            <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 24px;">Acción por el Clima (ODS 13)</p>
+            <div style="font-size: 2.8rem; margin-bottom: 6px;">🌿</div>
+            <h2 style="color: var(--primary); font-size: 1.35rem; font-weight: 700;">EcoImpacto UTSC</h2>
+            <p style="color: var(--gray); font-size: 0.82rem; margin-bottom: 22px;">Acción por el Clima (ODS 13)</p>
             
             <div id="login-inputs">
                 <input type="email" id="login-email" class="input-login" placeholder="Correo electrónico">
@@ -602,46 +594,46 @@
             </div>
             
             <button class="btn-google" onclick="loginConGoogle()">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="16" alt="Google"> Continuar con Google
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="15" alt="Google"> Continuar con Google
             </button>
             
             <button class="btn-google" style="background-color: #1877f2; color: white; border-color: #1877f2;" onclick="loginConFacebook()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="16" alt="Facebook"> Continuar con Facebook
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="15" alt="Facebook"> Continuar con Facebook
             </button>
 
-            <p style="font-size: 0.82rem; margin-top: 20px; color: var(--gray);">¿No tienes cuenta? <a href="#" onclick="irARegistro()" style="color: var(--primary); font-weight: 700; text-decoration: none;">Regístrate</a></p>
+            <p style="font-size: 0.8rem; margin-top: 18px; color: var(--gray);">¿No tienes cuenta? <a href="#" onclick="irARegistro()" style="color: var(--primary); font-weight: 700; text-decoration: none;">Regístrate</a></p>
         </div>
 
         <!-- SECCIÓN TOKEN -->
         <div id="token-section" class="auth-card" style="display: none;">
-            <div style="font-size: 3rem; margin-bottom: 8px;">🔑</div>
-            <h2 style="font-size: 1.3rem;">Seguridad UTSC</h2>
-            <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 15px;">Token temporal generado:</p>
-            <div style="background: var(--primary-bg); padding: 15px; border-radius: 14px; margin-bottom: 20px; font-weight: bold; font-size: 1.3rem; color: var(--primary); border: 2px dashed var(--primary-light);">
+            <div style="font-size: 2.8rem; margin-bottom: 6px;">🔑</div>
+            <h2 style="font-size: 1.25rem;">Seguridad UTSC</h2>
+            <p style="color: var(--gray); font-size: 0.82rem; margin-bottom: 14px;">Token temporal generado:</p>
+            <div style="background: var(--primary-bg); padding: 14px; border-radius: 12px; margin-bottom: 18px; font-weight: bold; font-size: 1.2rem; color: var(--primary); border: 2px dashed var(--primary-light);">
                 <span id="display-token-id">0000</span>
             </div>
-            <input type="text" id="input-token-value" class="input-login" placeholder="4 dígitos" maxlength="4" style="text-align: center; font-size: 1.2rem; font-weight: 600; letter-spacing: 3px;">
+            <input type="text" id="input-token-value" class="input-login" placeholder="4 dígitos" maxlength="4" style="text-align: center; font-size: 1.15rem; font-weight: 600; letter-spacing: 3px;">
             <button class="btn-auth" onclick="validarTokenEscrito()">VERIFICAR</button>
-            <p style="margin-top: 15px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.85rem;">← Cancelar</a></p>
+            <p style="margin-top: 14px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.82rem;">← Cancelar</a></p>
         </div>
 
         <!-- SECCIÓN REGISTRO -->
         <div id="register-section" class="auth-card" style="display: none;">
-            <h2 style="font-size: 1.3rem;">Únete al cambio</h2>
-            <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 18px;">Crea tu cuenta nueva</p>
+            <h2 style="font-size: 1.25rem;">Únete al cambio</h2>
+            <p style="color: var(--gray); font-size: 0.82rem; margin-bottom: 16px;">Crea tu cuenta nueva</p>
             <input type="email" id="reg-email" class="input-login" placeholder="Correo electrónico">
             <input type="password" id="reg-pass" class="input-login" placeholder="Contraseña (mín. 8 caracteres)">
             <button class="btn-auth" onclick="registrarNuevoUsuario()">CREAR CUENTA</button>
-            <p style="margin-top: 15px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.85rem;">← Volver</a></p>
+            <p style="margin-top: 14px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.82rem;">← Volver</a></p>
         </div>
 
         <!-- SECCIÓN RECUPERAR -->
         <div id="recover-section" class="auth-card" style="display: none;">
-            <h2 style="font-size: 1.3rem;">Recuperar Cuenta</h2>
-            <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 18px;">Ingresa tu correo registrado</p>
+            <h2 style="font-size: 1.25rem;">Recuperar Cuenta</h2>
+            <p style="color: var(--gray); font-size: 0.82rem; margin-bottom: 16px;">Ingresa tu correo registrado</p>
             <input type="email" id="recover-email" class="input-login" placeholder="Correo electrónico">
             <button class="btn-auth" onclick="recuperarPassword()">ENVIAR ENLACE</button>
-            <p style="margin-top: 15px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.85rem;">← Volver</a></p>
+            <p style="margin-top: 14px;"><a href="#" onclick="irALogin()" style="color: var(--gray); text-decoration: none; font-size: 0.82rem;">← Volver</a></p>
         </div>
 
         <!-- APLICACIÓN PRINCIPAL PROTEGIDA -->
@@ -660,11 +652,11 @@
                             <div class="rango-badge-icon" id="rango-icono">🌱</div>
                             <div style="flex: 1;">
                                 <div style="display: flex; align-items: center; justify-content: space-between;">
-                                    <h3 id="rango-titulo" style="color: var(--primary); font-size: 1rem; font-weight: 700;">Novato Verde</h3>
+                                    <h3 id="rango-titulo" style="color: var(--primary); font-size: 0.95rem; font-weight: 700;">Novato Verde</h3>
                                     <div class="streak-pill">🔥 <span id="streak-counter">1</span> Días</div>
                                 </div>
-                                <p id="rango-descripcion" style="font-size: 0.75rem; color: var(--gray); margin: 4px 0;">Sube de nivel completando tests.</p>
-                                <div style="font-size: 0.72rem; font-weight: 600; color: var(--dark);">Progreso: <span id="rango-porcentaje-txt">0%</span></div>
+                                <p id="rango-descripcion" style="font-size: 0.72rem; color: var(--gray); margin: 3px 0;">Sube de nivel completando tests.</p>
+                                <div style="font-size: 0.7rem; font-weight: 600; color: var(--dark);">Progreso: <span id="rango-porcentaje-txt">0%</span></div>
                                 <div class="barra-progreso-container">
                                     <div class="barra-progreso-fill" id="rango-barra-fill"></div>
                                 </div>
@@ -677,8 +669,8 @@
                             <span>☰</span> Información Clave ODS 13
                         </button>
                         <div id="panel-ods13" class="contenido-ods13">
-                            <p style="margin-bottom: 8px; color: var(--dark);">El ODS 13 exige medidas urgentes contra el cambio climático.</p>
-                            <ul style="margin-left: 18px; display: flex; flex-direction: column; gap: 4px; color: var(--gray);">
+                            <p style="margin-bottom: 6px; color: var(--dark);">El ODS 13 exige medidas urgentes contra el cambio climático.</p>
+                            <ul style="margin-left: 15px; display: flex; flex-direction: column; gap: 3px; color: var(--gray);">
                                 <li>Mitigación y ahorro energético.</li>
                                 <li>Reducción de plásticos en UTSC.</li>
                             </ul>
@@ -686,18 +678,18 @@
                     </div>
 
                     <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white;">
-                        <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 6px;">🌤️ Clima Local (API)</h3>
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.06); padding: 12px; border-radius: 12px; margin-top: 8px;">
+                        <h3 style="color: var(--accent); font-size: 0.95rem; margin-bottom: 4px;">🌤️ Clima Local (API)</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.06); padding: 10px; border-radius: 10px; margin-top: 6px;">
                             <div>
-                                <strong style="font-size: 0.9rem; display: block;">Santa Catarina, MX</strong>
-                                <span id="txt-api-desc" style="font-size: 0.78rem; opacity: 0.85;">Sincronizando...</span>
+                                <strong style="font-size: 0.85rem; display: block;">Santa Catarina, MX</strong>
+                                <span id="txt-api-desc" style="font-size: 0.72rem; opacity: 0.85;">Sincronizando...</span>
                             </div>
-                            <div id="txt-api-temp" style="font-size: 1.6rem; font-weight: 700;">--°C</div>
+                            <div id="txt-api-temp" style="font-size: 1.5rem; font-weight: 700;">--°C</div>
                         </div>
                     </div>
 
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">📊 Estado Actual de tu Huella</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">📊 Estado Actual de tu Huella</h2>
                         <div class="grid-impactos">
                             <div id="box-general" class="cuadro-resultado"><h4>General 🌳</h4><span class="porcentaje-txt" id="txt-general">--%</span><div id="tip-general" class="tip-box-dinamico"></div></div>
                             <div id="box-deporte" class="cuadro-resultado"><h4>Deporte 🏀</h4><span class="porcentaje-txt" id="txt-deporte">--%</span><div id="tip-deporte" class="tip-box-dinamico"></div></div>
@@ -706,20 +698,19 @@
                         </div>
                     </div>
 
-                    <!-- TRIVIA CORREGIDA Y MEJORADA -->
                     <div class="trivia-interactiva-box">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                             <h3 style="color: #b45309; font-size: 0.95rem; font-weight: 700; margin:0;">💡 EcoTrivia Diaria</h3>
                             <span style="font-size: 0.8rem; font-weight: 700; color: #b45309;">Pts: <span id="trivia-score">0</span></span>
                         </div>
-                        <div id="trivia-question-text" style="font-size: 0.88rem; color: #78350f; font-weight: 600; margin-bottom: 10px; line-height: 1.4;">Cargando...</div>
+                        <div id="trivia-question-text" style="font-size: 0.85rem; color: #78350f; font-weight: 600; margin-bottom: 12px; line-height: 1.4;">Cargando...</div>
                         <div class="trivia-options-container" id="trivia-options-group"></div>
                         <div id="trivia-feedback" style="font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; min-height: 18px;"></div>
                         <button id="trivia-next-btn" class="btn-auth" style="background: #f59e0b; margin-top: 0; display: none; padding: 10px; font-size: 0.85rem;" onclick="siguientePreguntaTrivia()">Siguiente Pregunta</button>
                     </div>
 
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">🏆 Logros</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🏆 Logros</h2>
                         <div class="grid-medallas">
                             <div id="med-general" class="medaling-card"><div class="medalla-icon">🌳</div><div class="medalla-title">Guardián</div></div>
                             <div id="med-deporte" class="medaling-card"><div class="medalla-icon">⚡</div><div class="medalla-title">Atleta</div></div>
@@ -729,7 +720,7 @@
                     </div>
 
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">💬 Comunidad</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">💬 Comunidad</h2>
                         <textarea id="input-comentario" class="textarea-comentario" placeholder="Escribe tu opinión..."></textarea>
                         <div style="text-align: right;"><button class="btn-comentario" onclick="publicarComentario()">Enviar comentario</button></div>
                         <div id="lista-comentarios" class="contenedor-lista-comentarios"></div>
@@ -739,7 +730,7 @@
                 <!-- SECCIÓN TIENDA -->
                 <section id="sec-tienda" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">🛍 Tienda Ecológica</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🛍 Tienda Ecológica</h2>
                         <div class="target-box">Alternativas ecológicas para reducir plásticos.</div>
                         
                         <div class="tienda-grid">
@@ -770,20 +761,20 @@
                         </div>
 
                         <div class="carrito-container">
-                            <h3 style="color: var(--dark); font-size: 0.9rem; font-weight: 700; margin-bottom: 10px;">🛒 Tu Carrito</h3>
-                            <div id="lista-carrito"><p style="color: var(--gray); font-size: 0.82rem; text-align: center;">Vacío.</p></div>
+                            <h3 style="color: var(--dark); font-size: 0.85rem; font-weight: 700; margin-bottom: 8px;">🛒 Tu Carrito</h3>
+                            <div id="lista-carrito"><p style="color: var(--gray); font-size: 0.78rem; text-align: center;">Vacío.</p></div>
                             <div class="carrito-total"><span>Total:</span><span id="carrito-precio-total">$0 MXN</span></div>
                             <button class="btn-checkout" onclick="procesarCompra()">FINALIZAR COMPRA</button>
                         </div>
                     </div>
                 </section>
 
-                <!-- SECCIÓN GENERAL (10 PREGUNTAS COMPLETAS) -->
+                <!-- SECCIÓN GENERAL -->
                 <section id="sec-general" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">🌳 Cuestionario General</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🌳 Cuestionario General</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 12px; font-size: 0.85rem; display: none;" id="timer-general">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-general">Tiempo: 60s</div>
                         <div id="contenido-test-general">
                             <form id="form-general">
                                 <div class="pregunta-box"><p>1. ¿Cómo te desplazas a la universidad?</p><label class="opcion"><input type="radio" name="g1" value="10"> Caminando / Bici</label><label class="opcion"><input type="radio" name="g1" value="5"> Público</label><label class="opcion"><input type="radio" name="g1" value="0"> Auto</label></div>
@@ -799,22 +790,22 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('general', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-general" style="display: none; text-align: center; padding: 20px;"><p style="font-size: 0.85rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-general" style="display: none; text-align: center; padding: 18px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
-                <!-- SECCIÓN DEPORTE (10 PREGUNTAS COMPLETAS) -->
+                <!-- SECCIÓN DEPORTE -->
                 <section id="sec-deporte" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">🏀 Deporte</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🏀 Deporte</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 12px; font-size: 0.85rem; display: none;" id="timer-deporte">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-deporte">Tiempo: 60s</div>
                         <div id="contenido-test-deporte">
                             <form id="form-deporte">
                                 <div class="pregunta-box"><p>1. ¿Entrenas al aire libre?</p><label class="opcion"><input type="radio" name="d1" value="10"> Sí</label><label class="opcion"><input type="radio" name="d1" value="0"> No</label></div>
                                 <div class="pregunta-box"><p>2. ¿Ropa deportiva sustentable?</p><label class="opcion"><input type="radio" name="d2" value="10"> Sí</label><label class="opcion"><input type="radio" name="d2" value="0"> No</label></div>
                                 <div class="pregunta-box"><p>3. ¿Envase reutilizable en entrenamientos?</p><label class="opcion"><input type="radio" name="d3" value="10"> Sí</label><label class="opcion"><input type="radio" name="d3" value="0"> No</label></div>
-                                <div class="pregunta-box"><p>4. ¿Te trasladas in bici a entrenar?</p><label class="opcion"><input type="radio" name="d4" value="10"> Sí</label><label class="opcion"><input type="radio" name="d4" value="0"> No</label></div>
+                                <div class="pregunta-box"><p>4. ¿Te trasladas en bici a entrenar?</p><label class="opcion"><input type="radio" name="d4" value="10"> Sí</label><label class="opcion"><input type="radio" name="d4" value="0"> No</label></div>
                                 <div class="pregunta-box"><p>5. ¿Evitas suplementos en plástico?</p><label class="opcion"><input type="radio" name="d5" value="10"> Sí</label><label class="opcion"><input type="radio" name="d5" value="0"> No</label></div>
                                 <div class="pregunta-box"><p>6. ¿Equipamiento duradero?</p><label class="opcion"><input type="radio" name="d6" value="10"> Sí</label><label class="opcion"><input type="radio" name="d6" value="0"> No</label></div>
                                 <div class="pregunta-box"><p>7. ¿Duchas de menos de 5 min?</p><label class="opcion"><input type="radio" name="d7" value="10"> Sí</label><label class="opcion"><input type="radio" name="d7" value="0"> No</label></div>
@@ -824,16 +815,16 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('deporte', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-deporte" style="display: none; text-align: center; padding: 20px;"><p style="font-size: 0.85rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-deporte" style="display: none; text-align: center; padding: 18px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
-                <!-- SECCIÓN ALIMENTACIÓN (10 PREGUNTAS COMPLETAS) -->
+                <!-- SECCIÓN ALIMENTACIÓN -->
                 <section id="sec-alimentacion" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">🍎 Comida</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🍎 Comida</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 12px; font-size: 0.85rem; display: none;" id="timer-alimentacion">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-alimentacion">Tiempo: 60s</div>
                         <div id="contenido-test-alimentacion">
                             <form id="form-alimentacion">
                                 <div class="pregunta-box"><p>1. ¿Consumes alimentos locales?</p><label class="opcion"><input type="radio" name="a1" value="10"> Sí</label><label class="opcion"><input type="radio" name="a1" value="0"> No</label></div>
@@ -849,16 +840,16 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('alimentacion', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-alimentacion" style="display: none; text-align: center; padding: 20px;"><p style="font-size: 0.85rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-alimentacion" style="display: none; text-align: center; padding: 18px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
-                <!-- SECCIÓN MODA (10 PREGUNTAS COMPLETAS) -->
+                <!-- SECCIÓN MODA -->
                 <section id="sec-moda" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">👕 Moda</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">👕 Moda</h2>
                         <div class="target-box">Límite: 60 segundos (1 vez por semana).</div>
-                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 12px; font-size: 0.85rem; display: none;" id="timer-moda">Tiempo: 60s</div>
+                        <div style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem; display: none;" id="timer-moda">Tiempo: 60s</div>
                         <div id="contenido-test-moda">
                             <form id="form-moda">
                                 <div class="pregunta-box"><p>1. ¿Compras ropa de segunda mano?</p><label class="opcion"><input type="radio" name="m1" value="10"> Sí</label><label class="opcion"><input type="radio" name="m1" value="0"> No</label></div>
@@ -874,26 +865,26 @@
                             </form>
                             <button class="btn-final" onclick="calcularImpacto('moda', 10)">GUARDAR</button>
                         </div>
-                        <div id="bloqueo-test-moda" style="display: none; text-align: center; padding: 20px;"><p style="font-size: 0.85rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
+                        <div id="bloqueo-test-moda" style="display: none; text-align: center; padding: 18px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN RETOS -->
                 <section id="sec-retos" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">🎯 Retos ODS 13</h2>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🎯 Retos ODS 13</h2>
                         <div class="retos-card">
-                            <h3 id="reto-semanal-titulo" style="color: #b45309; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">🌱 Reto Semanal</h3>
-                            <p id="reto-semanal-desc" style="font-size: 0.82rem; color: #78350f; margin-bottom: 12px; line-height: 1.4;">Cargando...</p>
-                            <button class="btn-auth" style="background: #f59e0b; margin-top: 0; font-size: 0.85rem;" onclick="unirseRetoSemanal()">PARTICIPAR EN EL RETO</button>
+                            <h3 id="reto-semanal-titulo" style="color: #b45309; font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">🌱 Reto Semanal</h3>
+                            <p id="reto-semanal-desc" style="font-size: 0.8rem; color: #78350f; margin-bottom: 10px;">Cargando...</p>
+                            <button class="btn-auth" style="background: #f59e0b; margin-top: 0; font-size: 0.82rem;" onclick="unirseRetoSemanal()">PARTICIPAR</button>
                         </div>
 
-                        <div class="evidencia-card" style="margin-top: 20px;">
-                            <h3 style="color: #065f46; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">📸 Subir Evidencia</h3>
-                            <input type="text" id="evidencia-titulo" class="input-login" placeholder="Título" style="background: white; font-size: 0.85rem;">
-                            <textarea id="evidencia-desc" class="textarea-comentario" placeholder="Descripción..." style="background: white; height: 75px;"></textarea>
-                            <input type="file" id="evidencia-archivo" accept="image/*" capture="environment" style="font-size: 0.82rem; margin: 10px 0; width: 100%;">
-                            <button class="btn-auth" style="background: var(--primary); margin-top: 0; font-size: 0.85rem;" onclick="subirEvidenciaAccion()">SUBIR EVIDENCIA</button>
+                        <div class="evidencia-card" style="margin-top: 15px;">
+                            <h3 style="color: #065f46; font-size: 0.9rem; font-weight: 700; margin-bottom: 4px;">📸 Subir Evidencia</h3>
+                            <input type="text" id="evidencia-titulo" class="input-login" placeholder="Título" style="background: white; font-size: 0.82rem;">
+                            <textarea id="evidencia-desc" class="textarea-comentario" placeholder="Descripción..." style="background: white; height: 70px;"></textarea>
+                            <input type="file" id="evidencia-archivo" accept="image/*" capture="environment" style="font-size: 0.8rem; margin: 8px 0; width: 100%;">
+                            <button class="btn-auth" style="background: var(--primary); margin-top: 0; font-size: 0.82rem;" onclick="subirEvidenciaAccion()">SUBIR</button>
                         </div>
                     </div>
                 </section>
@@ -901,36 +892,36 @@
                 <!-- SECCIÓN QUIZ SEMANAL -->
                 <section id="sec-cuestionario-semanal" class="seccion-test">
                     <div class="card">
-                        <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;">⏱️ Quiz Semanal</h2>
-                        <div id="cuestionario-timer" style="font-weight: bold; color: var(--danger); margin-bottom: 12px; font-size: 0.88rem;">Tiempo: 60s</div>
+                        <h2 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 6px;">⏱️ Quiz Semanal</h2>
+                        <div id="cuestionario-timer" style="font-weight: bold; color: var(--danger); margin-bottom: 10px; font-size: 0.82rem;">Tiempo: 60s</div>
                         <div id="quiz-contenido-activo">
                             <form id="form-cuestionario-semanal">
                                 <div class="pregunta-box"><p>1. ¿Acción que reduce tu huella?</p><label class="opcion"><input type="radio" name="cs1" value="correcta"> Usar bici</label><label class="opcion"><input type="radio" name="cs1" value="incorrecta"> Dejar luces</label></div>
                             </form>
-                            <button type="button" class="btn-final" onclick="enviarCuestionarioSemanal(false)">Enviar respuestas</button>
+                            <button type="button" class="btn-final" onclick="enviarCuestionarioSemanal(false)">Enviar</button>
                         </div>
-                        <div id="quiz-mensaje-bloqueo" style="display: none; text-align: center; padding: 20px;"><p style="font-size: 0.85rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
+                        <div id="quiz-mensaje-bloqueo" style="display: none; text-align: center; padding: 18px;"><p style="font-size: 0.82rem; color: var(--gray);">Ya respondiste esta semana.</p></div>
                     </div>
                 </section>
 
                 <!-- SECCIÓN PERFIL -->
                 <section id="sec-cuenta" class="seccion-test">
                     <div class="card" style="text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 8px;">👤</div>
-                        <h2 style="font-size: 1.1rem; font-weight: 700;">Mi Panel UTSC</h2>
-                        <div class="input-login" id="info-correo" style="font-size: 0.85rem; pointer-events: none;">--</div>
-                        <div style="margin: 20px auto; max-width: 220px; background: #f8fafc; padding: 14px; border-radius: 14px; border: 2px dashed #cbd5e1;">
-                            <div style="font-size: 0.78rem; color: var(--gray); font-weight: 600;">ID Eco-UTSC</div>
-                            <div id="qr-id-txt" style="font-size: 0.9rem; font-weight: bold; color: var(--dark); margin-top: 4px;">--</div>
+                        <div style="font-size: 3rem; margin-bottom: 6px;">👤</div>
+                        <h2 style="font-size: 1.05rem; font-weight: 700;">Mi Panel UTSC</h2>
+                        <div class="input-login" id="info-correo" style="font-size: 0.82rem; pointer-events: none;">--</div>
+                        <div style="margin: 18px auto; max-width: 200px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 2px dashed #cbd5e1;">
+                            <div style="font-size: 0.75rem; color: var(--gray); font-weight: 600;">ID Eco-UTSC</div>
+                            <div id="qr-id-txt" style="font-size: 0.85rem; font-weight: bold; color: var(--dark); margin-top: 4px;">--</div>
                         </div>
-                        <button class="btn-auth" style="background: var(--gray); font-size: 0.9rem;" onclick="cerrarSesion()">CERRAR SESIÓN</button>
+                        <button class="btn-auth" style="background: var(--gray); font-size: 0.85rem;" onclick="cerrarSesion()">CERRAR SESIÓN</button>
                     </div>
                 </section>
             </div>
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR (ESTILO APP NATIVA) -->
+    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
     <nav id="app-nav" style="display: none;">
         <button onclick="cambiarSeccion('dashboard')" id="nav-dashboard" class="active"><span>🏠</span>Inicio</button>
         <button onclick="cambiarSeccion('tienda')" id="nav-tienda"><span>🛍️</span>Tienda<span id="badge-carrito" class="badge-carrito" style="display:none;">0</span></button>
@@ -1064,9 +1055,8 @@
         Swal.fire({ icon: porTiempo ? 'warning' : 'success', title: porTiempo ? 'Tiempo agotado' : '¡Enviado!', timer: 1500, showConfirmButton: false });
     }
 
-    /* TRIVIA CORREGIDA CON PREGUNTAS Y OPCIONES CLARAS */
     const preguntasTrivia = [
-        { pregunta: "¿Cuánto tiempo tarda una botella de plástico PET común en descomponerse?", opciones: ["10 años", "100 años", "Más de 400 años", "50 años"], respuestaCorrecta: 2 },
+        { pregunta: "¿Cuánto tiempo tarda una botella de plástico PET en descomponerse?", opciones: ["10 años", "100 años", "Más de 400 años", "50 años"], respuestaCorrecta: 2 },
         { pregunta: "¿Cuál de estos materiales se puede reciclar infinitamente sin perder calidad?", opciones: ["El vidrio", "El papel común", "El cartón", "El plástico"], respuestaCorrecta: 0 },
         { pregunta: "¿Qué contenedor se utiliza habitualmente para depositar envases de plástico y latas?", opciones: ["Contenedor Azul", "Contenedor Amarillo", "Contenedor Verde", "Contenedor Marrón"], respuestaCorrecta: 1 }
     ];
@@ -1109,7 +1099,7 @@
         } else {
             botonSeleccionado.classList.add("incorrect");
             botones[actual.respuestaCorrecta].classList.add("correct");
-            document.getElementById("trivia-feedback").textContent = "Incorrecto. La respuesta correcta está marcada en verde.";
+            document.getElementById("trivia-feedback").textContent = "Incorrecto. La respuesta correcta está en verde.";
             document.getElementById("trivia-feedback").style.color = "#991b1b";
         }
         document.getElementById("trivia-next-btn").style.display = "block";
@@ -1285,7 +1275,7 @@
         const badge = document.getElementById('badge-carrito');
         const totalSpan = document.getElementById('carrito-precio-total');
         if (carritoCompras.length === 0) {
-            contenedor.innerHTML = "<p style='color: var(--gray); font-size: 0.82rem; text-align: center;'>Vacío.</p>";
+            contenedor.innerHTML = "<p style='color: var(--gray); font-size: 0.78rem; text-align: center;'>Vacío.</p>";
             badge.style.display = 'none';
             totalSpan.innerText = "$0 MXN";
             return;
@@ -1327,77 +1317,146 @@
         
         if(!porTiempo && respondidas < numPreguntas) {
             iniciarTemporizadorTest(categoria);
-            return alert("Responde todas las preguntas.");
+            return alert("Responde todas las preguntas antes de enviar.");
         }
 
         const porcentaje = Math.round((puntos / (numPreguntas * 10)) * 100);
-        db.collection("eco_stats").doc(user.uid).set({ [categoria]: porcentaje }, { merge: true }).then(() => {
-            Swal.fire({ icon: porTiempo ? 'warning' : 'success', title: porTiempo ? 'Tiempo agotado' : '¡Guardado!', timer: 1200, showConfirmButton: false });
-            cargarDatosUsuario(user.uid);
-            cambiarSeccion('dashboard');
-        });
+
+        if (user) {
+            db.collection("eco_stats").doc(user.uid).set({
+                [categoria]: porcentaje,
+                fechaActualizacion: new Date()
+            }, { merge: true }).then(() => {
+                cargarDatosUsuario(user.uid);
+                Swal.fire({ icon: 'success', title: '¡Impacto guardado!', text: `Puntuación: ${porcentaje}%`, timer: 1500, showConfirmButton: false });
+                verificarBloqueoTest(categoria);
+                cambiarSeccion('dashboard');
+            });
+        }
     }
 
     function cargarDatosUsuario(uid) {
-        db.collection("eco_stats").doc(uid).get().then(doc => {
-            if(doc.exists) {
-                const info = doc.data();
-                actualizarCardImpacto("general", info.general);
-                actualizarCardImpacto("deporte", info.deporte);
-                actualizarCardImpacto("alimentacion", info.alimentacion);
-                actualizarCardImpacto("moda", info.moda);
-                actualizarRangoGlobalEco([info.general || 0, info.deporte || 0, info.alimentacion || 0, info.moda || 0]);
+        db.collection("eco_stats").doc(uid).get().then((doc) => {
+            if (doc.exists) {
+                const data = doc.data();
+                actualizarMetricasDashboard(data);
             }
         });
     }
 
-    function actualizarRangoGlobalEco(puntajes) {
-        const promedio = Math.round(puntajes.reduce((a, b) => a + b, 0) / 4);
-        let titulo = promedio >= 80 ? "Leyenda ODS 13" : promedio >= 60 ? "Guardián del Clima" : "Novato Verde";
-        document.getElementById('rango-titulo').innerText = titulo;
-        document.getElementById('rango-porcentaje-txt').innerText = `${promedio}%`;
-        document.getElementById('rango-barra-fill').style.width = `${promedio}%`;
-    }
+    function actualizarMetricasDashboard(data) {
+        const categorias = ['general', 'deporte', 'alimentacion', 'moda'];
+        let sumaTotal = 0;
+        let cont = 0;
 
-    function actualizarCardImpacto(cat, valor) {
-        const txtElemento = document.getElementById(`txt-${cat}`);
-        const medallaElemento = document.querySelectorAll('.medaling-card')[cat === "general" ? 0 : cat === "deporte" ? 1 : cat === "alimentacion" ? 2 : 3];
-        if(valor === undefined) { txtElemento.innerText = "--%"; return; }
-        txtElemento.innerText = `${valor}%`;
-        if(valor >= 70) medallaElemento.classList.add('desbloqueada');
+        categorias.forEach(cat => {
+            if (data[cat] !== undefined) {
+                const val = data[cat];
+                sumaTotal += val;
+                cont++;
+
+                const txtEl = document.getElementById(`txt-${cat}`);
+                if (txtEl) txtEl.innerText = `${val}%`;
+
+                const tipEl = document.getElementById(`tip-${cat}`);
+                if (tipEl) {
+                    tipEl.style.display = 'block';
+                    if (val >= 80) tipEl.innerText = "¡Excelente! Mantén tus hábitos verdes.";
+                    else if (val >= 50) tipEl.innerText = "Buen nivel. Puedes mejorar reduciendo plásticos.";
+                    else tipEl.innerText = "Atención: Aplica acciones sustentables hoy.";
+                }
+
+                const medEl = document.getElementById(`med-${cat}`);
+                if (medEl) {
+                    if (val >= 70) medEl.classList.add('desbloqueada');
+                    else medEl.classList.remove('desbloqueada');
+                }
+            }
+        });
+
+        const promedioGeneral = cont > 0 ? Math.round(sumaTotal / cont) : 0;
+        
+        const barraFill = document.getElementById('rango-barra-fill');
+        const barraTxt = document.getElementById('rango-porcentaje-txt');
+        const rangoTitulo = document.getElementById('rango-titulo');
+        const rangoIcono = document.getElementById('rango-icono');
+
+        if (barraFill) barraFill.style.width = `${promedioGeneral}%`;
+        if (barraTxt) barraTxt.innerText = `${promedioGeneral}%`;
+
+        if (rangoTitulo && rangoIcono) {
+            if (promedioGeneral >= 80) {
+                rangoTitulo.innerText = "Héroe Ambiental UTSC";
+                rangoIcono.innerText = "🌳";
+            } else if (promedioGeneral >= 50) {
+                rangoTitulo.innerText = "Activista Ecológico";
+                rangoIcono.innerText = "🌿";
+            } else {
+                rangoTitulo.innerText = "Novato Verde";
+                rangoIcono.innerText = "🌱";
+            }
+        }
     }
 
     function publicarComentario() {
         const user = auth.currentUser || usuarioTemporal;
         const texto = document.getElementById('input-comentario').value.trim();
-        if(!texto) return;
-        db.collection("comentarios").add({ correo: user.email || 'Anónimo', texto, fecha: new Date() }).then(() => {
+        if (!texto) return alert("Escribe un comentario.");
+
+        db.collection("comunidad_eco").add({
+            uid: user ? user.uid : 'anon',
+            usuario: user ? (user.email ? user.email.split('@')[0] : 'Estudiante') : 'Anónimo',
+            texto: texto,
+            fecha: new Date()
+        }).then(() => {
             document.getElementById('input-comentario').value = "";
+            Swal.fire({ icon: 'success', title: 'Comentario publicado', timer: 1200, showConfirmButton: false });
         });
     }
 
     function escucharComentarios() {
-        db.collection("comentarios").orderBy("fecha", "desc").limit(5).onSnapshot(snapshot => {
-            const contenedor = document.getElementById('lista-comentarios');
-            contenedor.innerHTML = snapshot.empty ? "<p style='text-align:center; font-size:0.8rem;'>Sin comentarios.</p>" : "";
-            snapshot.forEach(doc => {
-                const c = doc.data();
-                contenedor.innerHTML += `<div class="comentario-item"><div class="comentario-meta"><strong>${c.correo.split('@')[0]}</strong></div><p>${c.texto}</p></div>`;
+        db.collection("comunidad_eco").orderBy("fecha", "desc").limit(10)
+            .onSnapshot((snapshot) => {
+                const contenedor = document.getElementById('lista-comentarios');
+                if (!contenedor) return;
+                let html = "";
+                snapshot.forEach((doc) => {
+                    const c = doc.data();
+                    const fechaStr = c.fecha ? new Date(c.fecha.seconds * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
+                    html += `
+                        <div class="comentario-item">
+                            <div class="comentario-meta"><span>👤 ${c.usuario || 'Estudiante'}</span><span>${fechaStr}</span></div>
+                            <div>${c.texto}</div>
+                        </div>
+                    `;
+                });
+                contenedor.innerHTML = html || "<p style='color: var(--gray); font-size:0.75rem;'>Sé el primero en comentar.</p>";
             });
-        });
+    }
+
+    function irARegistro() {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('register-section').style.display = 'block';
+    }
+
+    function irALogin() {
+        document.getElementById('register-section').style.display = 'none';
+        document.getElementById('recover-section').style.display = 'none';
+        document.getElementById('token-section').style.display = 'none';
+        document.getElementById('login-section').style.display = 'block';
+    }
+
+    function irARecuperar() {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('recover-section').style.display = 'block';
     }
 
     function cerrarSesion() {
+        sessionStorage.removeItem('tokenVerificado');
         auth.signOut().then(() => {
-            usuarioTemporal = null;
-            sessionStorage.removeItem('tokenVerificado');
             ocultarTodoYMostrarLogin();
         });
     }
-
-    function irARegistro() { document.getElementById('login-section').style.display = 'none'; document.getElementById('register-section').style.display = 'block'; }
-    function irALogin() { document.getElementById('register-section').style.display = 'none'; document.getElementById('recover-section').style.display = 'none'; document.getElementById('token-section').style.display = 'none'; document.getElementById('login-section').style.display = 'block'; }
-    function irARecuperar() { document.getElementById('login-section').style.display = 'none'; document.getElementById('recover-section').style.display = 'block'; }
 </script>
 </body>
 </html>
