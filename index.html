@@ -1061,7 +1061,6 @@
     let tokenGeneradoGlobal = ""; 
     let carritoCompras = [];
 
-    // LÓGICA DE CONTROL DE TIEMPO Y BLOQUEO SEMANAL PARA LOS 4 TESTS (GENERAL, DEPORTE, COMIDA, MODA)
     let temporizadorest = null;
     let tiempoRestanteTest = 60;
 
@@ -1106,7 +1105,6 @@
         return false;
     }
 
-    // LÓGICA DEL CUESTIONARIO SEMANAL EXTRA CON TIEMPO Y BLOQUEO
     let tiempoRestanteQuiz = 60;
     let temporizadorQuiz = null;
 
@@ -1167,7 +1165,6 @@
         Swal.fire({ icon: 'info', title: 'Test reiniciado', text: 'Puedes volver a responderlo.', timer: 1500, showConfirmButton: false });
     }
 
-    // Función actualizada para tips dinámicos por categoría y porcentaje
     function obtenerTipPorCategoriaYPorcentaje(categoria, porcentaje) {
       const cat = categoria.toLowerCase();
 
@@ -1207,7 +1204,6 @@
       return "Sigue optimizando tus hábitos ecológicos diariamente.";
     }
 
-    // Trivia Ecológica Interactiva
     const preguntasTrivia = [
         {
             pregunta: "¿Cuánto tiempo tarda una botella de plástico común en descomponerse?",
@@ -1433,7 +1429,7 @@
         
         auth.createUserWithEmailAndPassword(email, pass).then((cred) => {
             db.collection("eco_stats").doc(cred.user.uid).set({
-                usuario: email, uid: cred.user.uid, general: 0, deporte: 0, alimentacion: 0, moda: 0
+                usuario: email, uid: cred.user.uid, general: 0, deporte: 0, alimentacion: 0, moda: 0, fechaActualizacion: new Date()
             }).then(() => {
                 alert("🎉 ¡Cuenta creada con éxito!");
                 irALogin();
@@ -1495,7 +1491,7 @@
         const reader = new FileReader();
         reader.onload = function(e) {
             db.collection("evidencias_sustentables").add({
-                uid: user.uid, titulo, descripcion, archivoUrl: e.target.result, fecha: new Date()
+                uid: user.uid, usuario: user.email || "Estudiante UTSC", titulo, descripcion, archivoUrl: e.target.result, fecha: new Date()
             }).then(() => {
                 Swal.fire({ icon: 'success', title: '¡Evidencia guardada!', confirmButtonColor: '#1abc9c' });
                 document.getElementById('evidencia-titulo').value = "";
@@ -1542,7 +1538,7 @@
         const user = auth.currentUser || usuarioTemporal;
         if (!user || carritoCompras.length === 0) return alert("Inicia sesión o agrega productos.");
         let total = carritoCompras.reduce((sum, item) => sum + item.precio, 0);
-        db.collection("compras_sustentables").add({ uid: user.uid, productos: carritoCompras, total, fecha: new Date() }).then(() => {
+        db.collection("compras_sustentables").add({ uid: user.uid, usuario: user.email || "Estudiante UTSC", productos: carritoCompras, total, fecha: new Date() }).then(() => {
             Swal.fire({ icon: 'success', title: '¡Compra exitosa!', text: `Total: $${total} MXN`, confirmButtonColor: '#2ecc71' });
             carritoCompras = [];
             actualizarVistaCarrito();
@@ -1571,7 +1567,12 @@
 
         const porcentaje = Math.round((puntos / (numPreguntas * 10)) * 100);
         
-        db.collection("eco_stats").doc(user.uid).set({ [categoria]: porcentaje }, { merge: true }).then(() => {
+        db.collection("eco_stats").doc(user.uid).set({ 
+            usuario: user.email || "Estudiante UTSC",
+            uid: user.uid,
+            [categoria]: porcentaje,
+            fechaActualizacion: new Date()
+        }, { merge: true }).then(() => {
             if (porTiempo) {
                 Swal.fire({ icon: 'warning', title: '¡Se acabó el tiempo!', text: `Resultados guardados automáticamente de ${categoria.toUpperCase()}.`, confirmButtonColor: '#f39c12' });
             } else {
@@ -1604,7 +1605,6 @@
         });
     }
 
-    // SISTEMA DE RANGOS Y NIVELES TOTALMENTE OPERATIVO
     function actualizarRangoGlobalEco(puntajes) {
         const suma = puntajes.reduce((a, b) => a + b, 0);
         const promedio = Math.round(suma / 4);
