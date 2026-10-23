@@ -702,7 +702,7 @@
                             <div class="streak-pill">🔥 <span id="streak-counter">1</span> Día de Racha</div>
                         </div>
                         <p id="rango-descripcion" style="font-size: 0.82rem; color: #5d6d7e; margin-bottom: 6px;">Completa tus test y retos para subir de nivel ecológico.</p>
-                        <div style="font-size: 0.75rem; font-weight: 600; color: #2e4053;">Progreso del Rango: <span id="rango-porcentaje-txt">0%</span></div>
+                        <div style="font-size: 0.75rem; font-weight: 600; color: #2e4053;">Progreso del Rango: <span id="rango-porcentaje-txt">0</span></div>
                         <div class="barra-progreso-container">
                             <div class="barra-progreso-fill" id="rango-barra-fill"></div>
                         </div>
@@ -739,10 +739,10 @@
             <div class="card">
                 <h2>📊 Estado Actual de tu Huella</h2>
                 <div class="grid-impactos">
-                    <div id="box-general" class="cuadro-resultado"><h4>General 🌳</h4><span class="porcentaje-txt" id="txt-general">--%</span><div id="tip-general" class="tip-box-dinamico"></div></div>
-                    <div id="box-deporte" class="cuadro-resultado"><h4>Deporte 🏀</h4><span class="porcentaje-txt" id="txt-deporte">--%</span><div id="tip-deporte" class="tip-box-dinamico"></div></div>
-                    <div id="box-alimentacion" class="cuadro-resultado"><h4>Comida 🍎</h4><span class="porcentaje-txt" id="txt-alimentacion">--%</span><div id="tip-alimentacion" class="tip-box-dinamico"></div></div>
-                    <div id="box-moda" class="cuadro-resultado"><h4>Moda 👕</h4><span class="porcentaje-txt" id="txt-moda">--%</span><div id="tip-moda" class="tip-box-dinamico"></div></div>
+                    <div id="box-general" class="cuadro-resultado"><h4>General 🌳</h4><span class="porcentaje-txt" id="txt-general">--</span><div id="tip-general" class="tip-box-dinamico"></div></div>
+                    <div id="box-deporte" class="cuadro-resultado"><h4>Deporte 🏀</h4><span class="porcentaje-txt" id="txt-deporte">--</span><div id="tip-deporte" class="tip-box-dinamico"></div></div>
+                    <div id="box-alimentacion" class="cuadro-resultado"><h4>Comida 🍎</h4><span class="porcentaje-txt" id="txt-alimentacion">--</span><div id="tip-alimentacion" class="tip-box-dinamico"></div></div>
+                    <div id="box-moda" class="cuadro-resultado"><h4>Moda 👕</h4><span class="porcentaje-txt" id="txt-moda">--</span><div id="tip-moda" class="tip-box-dinamico"></div></div>
                 </div>
             </div>
 
@@ -1069,11 +1069,10 @@
                                 <th>Deporte</th>
                                 <th>Comida</th>
                                 <th>Moda</th>
-                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody id="admin-tabla-quizzes">
-                            <tr><td colspan="6" style="text-align: center;">Cargando respuestas de quiz...</td></tr>
+                            <tr><td colspan="5" style="text-align: center;">Cargando respuestas de quiz...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1597,7 +1596,7 @@
         db.collection("eco_stats").get().then(snapshot => {
             const tbodyQuizzes = document.getElementById('admin-tabla-quizzes');
             if (snapshot.empty) {
-                tbodyQuizzes.innerHTML = '<tr><td colspan="6" style="text-align:center;">No hay registros de quiz.</td></tr>';
+                tbodyQuizzes.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay registros de quiz.</td></tr>';
                 return;
             }
             let html = '';
@@ -1606,13 +1605,10 @@
                 html += `
                     <tr>
                         <td><strong>${data.usuario || 'Usuario'}</strong></td>
-                        <td>${data.general || 0}%</td>
-                        <td>${data.deporte || 0}%</td>
-                        <td>${data.alimentacion || 0}%</td>
-                        <td>${data.moda || 0}%</td>
-                        <td>
-                            <button class="btn-admin-act" style="background: var(--azul);" onclick="editarQuizAdmin('${doc.id}')">✏️ Editar</button>
-                        </td>
+                        <td>${data.general || 0}</td>
+                        <td>${data.deporte || 0}</td>
+                        <td>${data.alimentacion || 0}</td>
+                        <td>${data.moda || 0}</td>
                     </tr>
                 `;
             });
@@ -1686,35 +1682,6 @@
                 aplicarPreguntasAFormularios();
                 renderizarEditorPreguntasAdmin();
                 Swal.fire('¡Actualizada!', 'El texto de la pregunta fue modificado con éxito.', 'success');
-            }
-        });
-    }
-
-    function editarQuizAdmin(docId) {
-        Swal.fire({
-            title: 'Editar Puntaje de Quiz',
-            html:
-                '<input id="swal-gen" class="swal2-input" placeholder="General %">' +
-                '<input id="swal-dep" class="swal2-input" placeholder="Deporte %">' +
-                '<input id="swal-ali" class="swal2-input" placeholder="Comida %">' +
-                '<input id="swal-mod" class="swal2-input" placeholder="Moda %">',
-            focusConfirm: false,
-            showCancelButton: true,
-            confirmButtonText: 'Guardar Cambios',
-            preConfirm: () => {
-                return {
-                    general: parseInt(document.getElementById('swal-gen').value) || 0,
-                    deporte: parseInt(document.getElementById('swal-dep').value) || 0,
-                    alimentacion: parseInt(document.getElementById('swal-ali').value) || 0,
-                    moda: parseInt(document.getElementById('swal-mod').value) || 0
-                }
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                db.collection("eco_stats").doc(docId).update(result.value).then(() => {
-                    Swal.fire('¡Actualizado!', 'El quiz ha sido editado.', 'success');
-                    cargarDatosAdminPanel();
-                });
             }
         });
     }
@@ -1884,7 +1851,7 @@
         document.getElementById('rango-icono').innerText = icono;
         document.getElementById('rango-titulo').innerText = `Rango: ${titulo}`;
         document.getElementById('rango-descripcion').innerText = descripcion;
-        document.getElementById('rango-porcentaje-txt').innerText = `${promedio}%`;
+        document.getElementById('rango-porcentaje-txt').innerText = `${promedio}`;
         document.getElementById('rango-barra-fill').style.width = `${promedio}%`;
     }
 
@@ -1897,13 +1864,13 @@
         const tipElemento = document.getElementById(`tip-${cat}`);
 
         if(valor === undefined) {
-            txtElemento.innerText = "--%";
+            txtElemento.innerText = "--";
             boxElemento.style.borderColor = "#f0f2f5";
             tipElemento.style.display = "none";
             return;
         }
 
-        txtElemento.innerText = `${valor}%`;
+        txtElemento.innerText = `${valor}`;
         tipElemento.style.display = "block";
         tipElemento.innerText = obtenerTipPorcentajeConRango(cat, valor);
 
