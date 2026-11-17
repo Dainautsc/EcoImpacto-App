@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#2c3e50">
     <title>EcoImpacto UTSC - App Móvil</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -29,6 +30,11 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        input, textarea, select {
+            user-select: text;
         }
 
         body {
@@ -40,18 +46,18 @@
             overflow-x: hidden;
         }
 
-        /* CONTENEDOR MARCO DE APP MÓVIL (Mantiene formato app en cualquier pantalla) */
+        /* CONTENEDOR EXCLUSIVO APP MÓVIL */
         .app-mobile-wrapper {
             width: 100%;
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            background: linear-gradient(rgba(244, 247, 246, 0.85), rgba(44, 62, 80, 0.35)), 
+            background: linear-gradient(rgba(244, 247, 246, 0.88), rgba(44, 62, 80, 0.35)), 
                         url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=900&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            padding-bottom: 88px;
+            padding-bottom: 92px;
             position: relative;
             box-shadow: 0 0 35px rgba(0,0,0,0.15);
         }
@@ -59,11 +65,9 @@
         .auth-card {
             width: 92%;
             max-width: 400px;
-            margin: 35px auto;
-            padding: 32px 22px;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            margin: 30px auto;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.97);
             border-radius: 24px;
             text-align: center;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
@@ -82,7 +86,6 @@
             margin-bottom: 16px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(0,0,0,0.03);
-            transition: var(--transition);
         }
 
         .target-box {
@@ -101,7 +104,6 @@
             border: 2px solid #eef2f5;
             border-radius: 12px;
             font-size: 0.92rem;
-            transition: var(--transition);
             background: #fafbfc;
             font-family: inherit;
         }
@@ -124,7 +126,6 @@
             font-weight: 600;
             margin-top: 12px;
             font-size: 0.95rem;
-            transition: var(--transition);
         }
         .btn-auth:active { transform: scale(0.98); }
 
@@ -143,7 +144,6 @@
             font-weight: 600;
             margin-top: 12px;
             font-size: 0.9rem;
-            transition: var(--transition);
         }
         .btn-google:active { transform: scale(0.98); }
 
@@ -165,7 +165,7 @@
             text-decoration: none;
         }
 
-        /* BARRA DE NAVEGACIÓN INFERIOR FIJA ESTILO APP NATIVA */
+        /* BARRA INFERIOR DE NAVEGACIÓN TIPO APP NATIVA */
         nav {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
@@ -180,7 +180,7 @@
             z-index: 1000;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
             border-top: 1px solid rgba(0,0,0,0.06);
-            padding: 6px 4px;
+            padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
             overflow-x: auto;
         }
         nav::-webkit-scrollbar { display: none; }
@@ -202,7 +202,6 @@
             flex: 1;
             min-width: 52px;
             position: relative;
-            transition: var(--transition);
         }
         nav button span { font-size: 1.15rem; }
         nav button.active { color: var(--naranja); font-weight: 700; background: rgba(243, 156, 18, 0.12); }
@@ -223,14 +222,14 @@
             background: linear-gradient(rgba(44, 62, 80, 0.55), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80');
             background-size: cover;
             background-position: center;
-            padding: 28px 16px;
+            padding: calc(26px + env(safe-area-inset-top)) 16px 24px;
             color: white;
             text-align: center;
             border-radius: 0 0 24px 24px;
             margin-bottom: 14px;
         }
-        header h1 { font-size: 1.4rem; }
-        header p { font-size: 0.8rem; opacity: 0.92; margin-top: 4px; }
+        header h1 { font-size: 1.38rem; }
+        header p { font-size: 0.78rem; opacity: 0.92; margin-top: 4px; }
 
         .menu-hamburguesa-card {
             background: linear-gradient(135deg, #f8f9f9 0%, #ebedef 100%);
@@ -253,7 +252,6 @@
             align-items: center;
             width: 100%;
             gap: 8px;
-            transition: var(--transition);
         }
         .contenido-ods13 {
             display: none;
@@ -263,7 +261,6 @@
             border-radius: 12px;
             border: 1px solid #d5dbdb;
             font-size: 0.84rem;
-            animation: fadeIn 0.3s ease;
         }
         .contenido-ods13.activo { display: block; }
 
@@ -279,7 +276,6 @@
             padding: 14px;
             border-radius: 16px;
             border: 2px solid #f0f2f5;
-            transition: var(--transition);
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -287,9 +283,9 @@
         .cuadro-resultado h4 { font-size: 0.9rem; }
         .porcentaje-txt { font-size: 1.8rem; font-weight: 700; color: var(--oscuro); }
 
-        .seccion-test { display: none; animation: fadeIn 0.35s ease; }
+        .seccion-test { display: none; animation: fadeIn 0.3s ease; }
         .seccion-test.activa { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
         .test-timer-banner {
             position: sticky;
@@ -301,13 +297,12 @@
             padding: 10px 14px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 14px;
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.2);
-            backdrop-filter: blur(8px);
         }
 
         .btn-reiniciar-test {
@@ -340,10 +335,9 @@
             cursor: pointer;
             border: 2px solid #eef2f5;
             font-size: 0.86rem;
-            transition: var(--transition);
         }
         .opcion:active { border-color: var(--naranja); background: #fdfaf6; }
-        .opcion input { margin-right: 10px; accent-color: var(--naranja); transform: scale(1.1); }
+        .opcion input { margin-right: 10px; accent-color: var(--naranja); transform: scale(1.15); }
 
         .btn-final {
             background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-oscuro) 100%);
@@ -374,7 +368,6 @@
             border: 2px solid #f0f2f5;
             filter: grayscale(100%);
             opacity: 0.45;
-            transition: var(--transition);
         }
         .medaling-card.desbloqueada { filter: grayscale(0%); opacity: 1; border-color: var(--naranja); background: #fff; }
         .medalla-icon { font-size: 1.7rem; margin-bottom: 4px; }
@@ -532,7 +525,6 @@
             cursor: pointer;
             font-size: 0.88rem;
             text-align: left;
-            transition: var(--transition);
             font-family: inherit;
             display: flex;
             align-items: center;
@@ -717,7 +709,7 @@
     <div id="login-section" class="auth-card">
         <div style="font-size: 2.8rem; margin-bottom: 8px;">🌿</div>
         <h2 style="color: var(--naranja-oscuro); font-size: 1.45rem;">EcoImpacto UTSC</h2>
-        <p style="color: #7f8c8d; font-size: 0.84rem; margin-bottom: 18px;">Mide tu huella y apoya la Acción por el Clima (ODS 13)</p>
+        <p style="color: #7f8c8d; font-size: 0.84rem; margin-bottom: 18px;">App Móvil · Acción por el Clima (ODS 13)</p>
         
         <div id="login-inputs">
             <input type="email" id="login-email" class="input-login" placeholder="Correo electrónico">
@@ -1259,6 +1251,9 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    // FORZAR PERSISTENCIA LOCAL PARA APPS MÓVILES / WEBVIEW (Evita el error de estado inicial)
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
+
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     const facebookProvider = new firebase.auth.FacebookAuthProvider();
     
@@ -1355,7 +1350,7 @@
                 Swal.fire({
                     icon: 'warning',
                     title: '⏱️ ¡Se acabó el tiempo!',
-                    text: 'El tiempo límite de 2 minutos terminó. El cuestionario se reinició para que puedas volver a intentarlo.',
+                    text: 'El tiempo límite de 2 minutos terminó. El cuestionario se reinició.',
                     confirmButtonColor: '#f39c12'
                 }).then(() => iniciarTemporizador(categoria));
             }
@@ -1371,8 +1366,7 @@
         Swal.fire({
             icon: 'success',
             title: '¡Cuestionario reiniciado!',
-            text: 'El tiempo y las respuestas se han restablecido a cero.',
-            timer: 1500,
+            timer: 1200,
             showConfirmButton: false
         });
     }
@@ -1482,7 +1476,7 @@
             return Swal.fire({
                 icon: 'warning',
                 title: 'EcoPuntos insuficientes',
-                text: `Necesitas ${costoPuntos} pts y actualmente tienes ${ecoPuntosUsuario} pts. ¡Completa más retos y cuestionarios para ganar puntos!`,
+                text: `Necesitas ${costoPuntos} pts y actualmente tienes ${ecoPuntosUsuario} pts.`,
                 confirmButtonColor: '#f39c12'
             });
         }
@@ -1498,7 +1492,7 @@
         Swal.fire({
             icon: 'success',
             title: '🎁 ¡Canje Exitoso (Gratis)!',
-            html: `Has canjeado <b>"${nombreProducto}"</b> por <b>${costoPuntos} EcoPuntos</b>.<br><br><span style="color: #27ae60; font-weight: 600;">¡El producto se ha enviado automáticamente a tu carrito con costo $0 MXN!</span>`,
+            html: `Has canjeado <b>"${nombreProducto}"</b> por <b>${costoPuntos} EcoPuntos</b>.<br><br><span style="color: #27ae60; font-weight: 600;">¡Se envió gratis ($0 MXN) a tu carrito!</span>`,
             confirmButtonColor: '#27ae60',
             confirmButtonText: 'Ver en el carrito'
         }).then(() => {
@@ -1659,10 +1653,22 @@
             });
     }
 
+    // DETECTAR RETORNO DE LOGIN EN MÓVIL SI SE USÓ REDIRECT
+    auth.getRedirectResult().then((result) => {
+        if (result && result.user) {
+            const user = result.user;
+            db.collection("eco_stats").doc(user.uid).set({ 
+                usuario: user.email || user.displayName, general: 0, deporte: 0, alimentacion: 0, moda: 0, racha: 1, ecoPuntos: 20 
+            }, { merge: true });
+        }
+    }).catch((err) => {
+        console.warn("Aviso WebView Auth:", err.message);
+    });
+
     auth.onAuthStateChanged((user) => {
         if (user) {
             usuarioTemporal = user;
-            if (sessionStorage.getItem('tokenVerificado') === 'true') { mostrarApp(); } else { levantarFlujoDeToken(); }
+            if (localStorage.getItem('tokenVerificado') === 'true') { mostrarApp(); } else { levantarFlujoDeToken(); }
         } else { ocultarTodoYMostrarLogin(); }
     });
 
@@ -1680,7 +1686,7 @@
 
     function validarTokenEscrito() {
         if (document.getElementById('input-token-value').value.trim() === tokenGeneradoGlobal) {
-            sessionStorage.setItem('tokenVerificado', 'true');
+            localStorage.setItem('tokenVerificado', 'true');
             document.getElementById('token-section').style.display = 'none';
             mostrarApp();
         } else { alert("Token incorrecto."); }
@@ -1689,7 +1695,22 @@
     function iniciarSesion() {
         const email = document.getElementById('login-email').value.trim();
         const pass = document.getElementById('login-pass').value;
-        auth.signInWithEmailAndPassword(email, pass).catch(err => alert(err.message));
+        if (!email || !pass) return Swal.fire('Campos vacíos', 'Ingresa tu correo y contraseña.', 'warning');
+        auth.signInWithEmailAndPassword(email, pass).catch(err => Swal.fire('Error de acceso', err.message, 'error'));
+    }
+
+    // MANEJO SEGURO PARA APP MÓVIL (Evita pantalla blanca por falta de estado inicial en WebView)
+    function manejarErrorOAuthMovil(err, proveedorNombre) {
+        if (err.code === 'auth/operation-not-supported-in-this-environment' || err.code === 'auth/web-storage-unsupported' || (err.message && err.message.includes('initial state'))) {
+            Swal.fire({
+                icon: 'info',
+                title: `Acceso con ${proveedorNombre} en App Móvil`,
+                text: 'El contenedor móvil bloquea ventanas externas de terceros por seguridad. Inicia sesión directamente con tu correo y contraseña o crea una cuenta rápida arriba.',
+                confirmButtonColor: '#f39c12'
+            });
+        } else {
+            Swal.fire('Aviso', err.message, 'warning');
+        }
     }
 
     function loginConGoogle() {
@@ -1698,7 +1719,7 @@
             db.collection("eco_stats").doc(user.uid).set({ 
                 usuario: user.email, general: 0, deporte: 0, alimentacion: 0, moda: 0, racha: 1, ecoPuntos: 20 
             }, { merge: true });
-        }).catch(err => alert(err.message));
+        }).catch(err => manejarErrorOAuthMovil(err, 'Google'));
     }
 
     function loginConFacebook() {
@@ -1707,7 +1728,7 @@
             db.collection("eco_stats").doc(user.uid).set({ 
                 usuario: user.email || user.displayName, general: 0, deporte: 0, alimentacion: 0, moda: 0, racha: 1, ecoPuntos: 20 
             }, { merge: true });
-        }).catch(err => alert(err.message));
+        }).catch(err => manejarErrorOAuthMovil(err, 'Facebook'));
     }
 
     function recuperarPassword() {
@@ -1724,9 +1745,9 @@
         const pass = document.getElementById('reg-pass').value;
         auth.createUserWithEmailAndPassword(email, pass).then(cred => {
             db.collection("eco_stats").doc(cred.user.uid).set({ usuario: email, general: 0, deporte: 0, alimentacion: 0, moda: 0, racha: 1, ecoPuntos: 20 });
-            alert("Cuenta creada.");
+            Swal.fire('¡Cuenta creada!', 'Ya puedes ingresar con tu correo.', 'success');
             irALogin();
-        }).catch(err => alert(err.message));
+        }).catch(err => Swal.fire('Error', err.message, 'error'));
     }
 
     function mostrarApp() {
@@ -1735,7 +1756,7 @@
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('app-protegida').style.display = 'block';
         document.getElementById('user-welcome').innerText = `Hola, ${user.email ? user.email.split('@')[0] : 'Estudiante'}`;
-        document.getElementById('info-correo').innerText = user.email || 'Externo';
+        document.getElementById('info-correo').innerText = user.email || 'Usuario Móvil';
 
         if (user.email === CORREO_ADMIN) {
             document.getElementById('nav-estudiante').style.display = 'none';
@@ -1983,7 +2004,7 @@
         Swal.fire('¡Evidencia subida!', msg, 'success'); 
     }
 
-    function cerrarSesion() { auth.signOut().then(() => { sessionStorage.removeItem('tokenVerificado'); location.reload(); }); }
+    function cerrarSesion() { auth.signOut().then(() => { localStorage.removeItem('tokenVerificado'); location.reload(); }); }
     function irARegistro() { document.getElementById('login-section').style.display='none'; document.getElementById('register-section').style.display='block'; }
     function irALogin() { document.getElementById('register-section').style.display='none'; document.getElementById('recover-section').style.display='none'; document.getElementById('login-section').style.display='block'; }
     function irARecuperar() { document.getElementById('login-section').style.display='none'; document.getElementById('recover-section').style.display='block'; }
