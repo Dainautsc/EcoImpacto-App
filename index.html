@@ -1211,6 +1211,16 @@
                 <div class="retos-card" style="background: linear-gradient(135deg, #eaf2f8 0%, #d4efdf 100%); border-color: #a9dfbf;">
                     <h3 id="reto-secundario-titulo" style="color: #196f3d; margin-bottom: 6px; font-size: 1.05rem;">🚲 Reto UTSC: Movilidad Sustentable</h3>
                     <p id="reto-secundario-desc" style="font-size: 0.86rem; color: #145a32; margin-bottom: 10px;">Cargando reto secundario...</p>
+                    
+                    <!-- CONTENEDOR DE LAS 7 BOLITAS PARA MOVILIDAD -->
+                    <div class="reto-bolitas-wrapper" style="border-color: #a9dfbf;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px;">
+                            <span style="font-size: 0.78rem; font-weight: 700; color: #196f3d;">Seguimiento de Movilidad (7 Días):</span>
+                            <span style="font-size: 0.7rem; color: #5d6d7e;">🟢 Cumplido | 🔴 Sin foto</span>
+                        </div>
+                        <div class="reto-bolitas-grid" id="contenedor-bolitas-movilidad"></div>
+                    </div>
+
                     <button class="btn-auth" style="background: #27ae60; margin-top: 5px;" onclick="unirseRetoMovilidad()">¡ACEPTO EL RETO! (+15 pts diario)</button>
                 </div>
 
@@ -1218,6 +1228,10 @@
                     <h3 style="color: #117a65; margin-bottom: 6px; font-size: 1.05rem;">📸 Subir Evidencia Fotográfica (+25 EcoPuntos diarios)</h3>
                     <p style="font-size: 0.84rem; color: #0e6251; margin-bottom: 10px;">Toma o selecciona una foto de tu actividad sustentable para marcar en verde tu día.</p>
                     
+                    <select id="evidencia-reto-tipo" class="input-login" style="background: white;">
+                        <option value="semanal">🌱 Evidencia para: Reto de la Semana (7 días)</option>
+                        <option value="movilidad">🚲 Evidencia para: Reto Movilidad Sustentable (7 días)</option>
+                    </select>
                     <input type="text" id="evidencia-titulo" class="input-login" placeholder="Título (ej. Reforestación UTSC)" style="background: white;">
                     <textarea id="evidencia-desc" class="textarea-comentario" placeholder="Describe brevemente tu evidencia..." style="background: white; height: 70px;"></textarea>
                     
@@ -1772,7 +1786,7 @@
     ];
 
     const listaRetosSecundarios = [
-        { titulo: "🚲 Reto UTSC: Movilidad Sustentable", descripcion: "Viaja en transporte público o bicicleta al campus al menos 3 días." }
+        { titulo: "🚲 Reto UTSC: Movilidad Sustentable", descripcion: "Viaja en transporte público, bicicleta o caminando al campus durante 7 días. Sube tu foto diaria." }
     ];
 
     function cargarRetosDinamicos() {
@@ -1802,15 +1816,7 @@
         return dia === 0 ? 6 : dia - 1;
     }
 
-    function renderizarBolitasRetoSemanal() {
-        const contenedor = document.getElementById('contenedor-bolitas-reto');
-        if (!contenedor) return;
-
-        const user = auth.currentUser || usuarioTemporal;
-        const uid = user ? user.uid : 'invitado';
-        const semanaKey = obtenerClaveSemanaActual();
-        const storageKey = `reto_evidencias_${uid}_${semanaKey}`;
-
+    function generarHtmlBolitas(storageKey) {
         let evidenciasSemana = JSON.parse(localStorage.getItem(storageKey) || '[false,false,false,false,false,false,false]');
         const indiceHoy = obtenerIndiceDiaSemana();
         const nombresDias = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
@@ -1838,7 +1844,23 @@
                 </div>
             `;
         }
-        contenedor.innerHTML = html;
+        return html;
+    }
+
+    function renderizarBolitasRetoSemanal() {
+        const user = auth.currentUser || usuarioTemporal;
+        const uid = user ? user.uid : 'invitado';
+        const semanaKey = obtenerClaveSemanaActual();
+
+        const contenedorSemanal = document.getElementById('contenedor-bolitas-reto');
+        if (contenedorSemanal) {
+            contenedorSemanal.innerHTML = generarHtmlBolitas(`reto_evidencias_${uid}_${semanaKey}`);
+        }
+
+        const contenedorMovilidad = document.getElementById('contenedor-bolitas-movilidad');
+        if (contenedorMovilidad) {
+            contenedorMovilidad.innerHTML = generarHtmlBolitas(`reto_movilidad_${uid}_${semanaKey}`);
+        }
     }
 
     function alternarMenuOds13() { document.getElementById('panel-ods13').classList.toggle('activo'); }
@@ -2114,7 +2136,7 @@
 
     function unirseRetoMovilidad() {
         const gano = otorgarPuntosConLimiteDiario('reto_movilidad', 15);
-        const msg = gano ? 'Ganaste +15 EcoPuntos por comprometerte con la movilidad sustentable.' : 'Ya reclamaste los EcoPuntos de hoy por este reto.';
+        const msg = gano ? 'Ganaste +15 EcoPuntos. Sube tu foto diaria para pintar tu bolita de verde en los 7 días.' : 'Ya reclamaste los EcoPuntos de hoy por este reto.';
         Swal.fire({ icon: 'success', title: '¡Reto Aceptado!', text: msg, confirmButtonColor: '#27ae60' });
     }
 
@@ -2153,12 +2175,15 @@
 
         Swal.fire({ title: 'Guardando evidencia...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
+        const tipoReto = document.getElementById('evidencia-reto-tipo') ? document.getElementById('evidencia-reto-tipo').value : 'semanal';
+
         comprimirImagenMovil(archivoInput.files[0], function(imagenComprimida) {
             db.collection("evidencias_sustentables").add({
-                uid: user.uid, titulo, descripcion, archivoUrl: imagenComprimida, fecha: new Date()
+                uid: user.uid, tipoReto, titulo, descripcion, archivoUrl: imagenComprimida, fecha: new Date()
             }).then(() => {
                 const semanaKey = obtenerClaveSemanaActual();
-                const storageKey = `reto_evidencias_${user.uid}_${semanaKey}`;
+                const prefijoStorage = tipoReto === 'movilidad' ? 'reto_movilidad' : 'reto_evidencias';
+                const storageKey = `${prefijoStorage}_${user.uid}_${semanaKey}`;
                 let evidenciasSemana = JSON.parse(localStorage.getItem(storageKey) || '[false,false,false,false,false,false,false]');
                 const indiceHoy = obtenerIndiceDiaSemana();
                 evidenciasSemana[indiceHoy] = true;
