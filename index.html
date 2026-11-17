@@ -945,7 +945,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN TIENDA SUSTENTABLE (12 PRODUCTOS COMPLETOS CON CANJE DE PUNTOS) -->
+        <!-- SECCIÓN TIENDA SUSTENTABLE -->
         <section id="sec-tienda" class="seccion-test">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
@@ -1223,7 +1223,7 @@
                     
                     <div style="margin-top: 10px;">
                         <label style="font-size: 0.84rem; font-weight: 600; color: #0e6251; display: block; margin-bottom: 4px;">Cámara o Galería:</label>
-                        <input type="file" id="evidencia-archivo" accept="image/*" capture="environment" style="font-size: 0.88rem; margin-bottom: 10px; width: 100%;">
+                        <input type="file" id="evidencia-archivo" accept="image/*" style="font-size: 0.88rem; margin-bottom: 10px; width: 100%;">
                     </div>
                     
                     <button class="btn-auth" style="background: #1abc9c; margin-top: 5px;" onclick="subirEvidenciaAccion()">GUARDAR EVIDENCIA</button>
@@ -1231,7 +1231,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN CUESTIONARIO SEMANAL (6 PREGUNTAS EDITABLES POR ADMIN) -->
+        <!-- SECCIÓN CUESTIONARIO SEMANAL -->
         <section id="sec-cuestionario-semanal" class="seccion-test">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
@@ -1789,7 +1789,6 @@
         document.getElementById('reto-secundario-desc').innerText = reto2.descripcion;
     }
 
-    // --- SEGUIMIENTO AUTOMÁTICO CON 7 BOLITAS PARA RETO SEMANAL ---
     function obtenerClaveSemanaActual() {
         const hoy = new Date();
         const diaSemana = hoy.getDay();
@@ -2119,6 +2118,28 @@
         Swal.fire({ icon: 'success', title: '¡Reto Aceptado!', text: msg, confirmButtonColor: '#27ae60' });
     }
 
+    // COMPRESIÓN DE IMAGEN PARA MÓVILES ANTES DE GUARDAR EN FIRESTORE
+    function comprimirImagenMovil(file, callback) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const maxWidth = 800;
+                const scaleSize = maxWidth / img.width;
+                canvas.width = img.width > maxWidth ? maxWidth : img.width;
+                canvas.height = img.width > maxWidth ? img.height * scaleSize : img.height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                const dataUrlComprimida = canvas.toDataURL('image/jpeg', 0.7);
+                callback(dataUrlComprimida);
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
     function subirEvidenciaAccion() {
         const user = auth.currentUser || usuarioTemporal;
         if (!user) return alert("Inicia sesión.");
@@ -2130,10 +2151,11 @@
             return Swal.fire('Falta la foto', 'Toma o selecciona una foto como evidencia para marcar tu día en verde.', 'warning');
         }
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
+        Swal.fire({ title: 'Guardando evidencia...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
+        comprimirImagenMovil(archivoInput.files[0], function(imagenComprimida) {
             db.collection("evidencias_sustentables").add({
-                uid: user.uid, titulo, descripcion, archivoUrl: e.target.result, fecha: new Date()
+                uid: user.uid, titulo, descripcion, archivoUrl: imagenComprimida, fecha: new Date()
             }).then(() => {
                 const semanaKey = obtenerClaveSemanaActual();
                 const storageKey = `reto_evidencias_${user.uid}_${semanaKey}`;
@@ -2153,9 +2175,10 @@
                 document.getElementById('evidencia-titulo').value = "";
                 document.getElementById('evidencia-desc').value = "";
                 archivoInput.value = "";
+            }).catch(err => {
+                Swal.fire('Error', 'No se pudo subir la evidencia: ' + err.message, 'error');
             });
-        };
-        reader.readAsDataURL(archivoInput.files[0]);
+        });
     }
 
     function agregarAlCarrito(nombre, precio) {
